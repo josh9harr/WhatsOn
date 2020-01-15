@@ -1,0 +1,25 @@
+[debug] [2020-01-14T21:43:35.890Z] ----------------------------------------------------------------------
+[debug] [2020-01-14T21:43:35.892Z] Command:       c:\Program Files\nodejs\node.exe c:\Users\Joshua Harrington\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2020-01-14T21:43:35.892Z] CLI Version:   7.12.0
+[debug] [2020-01-14T21:43:35.892Z] Platform:      win32
+[debug] [2020-01-14T21:43:35.892Z] Node Version:  v12.0.0
+[debug] [2020-01-14T21:43:35.893Z] Time:          Tue Jan 14 2020 14:43:35 GMT-0700 (Mountain Standard Time)
+[debug] [2020-01-14T21:43:35.893Z] ----------------------------------------------------------------------
+[debug] [2020-01-14T21:43:35.893Z] 
+[debug] [2020-01-14T21:43:35.901Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-01-14T21:43:35.901Z] > authorizing via signed-in user
+[debug] [2020-01-14T21:43:35.901Z] [iam] checking project whats-on-33e4b for permissions ["firebase.projects.get"]
+[debug] [2020-01-14T21:43:35.903Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/whats-on-33e4b:testIamPermissions  
+
+[debug] [2020-01-14T21:43:36.285Z] <<< HTTP RESPONSE 200
+[debug] [2020-01-14T21:43:36.286Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/whats-on-33e4b  
+ 
+[debug] [2020-01-14T21:43:36.425Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Joshua Harrington\Desktop\Capstone\WhatsOn'...
+[info] 
+[debug] [2020-01-14T21:43:36.429Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/whats-on-33e4b/webApps/-/config  
+ 
+[debug] [2020-01-14T21:43:36.787Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: src
+[info] +  hosting: Local server: http://localhost:5000

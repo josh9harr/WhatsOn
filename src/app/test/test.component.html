@@ -1,1 +1,7 @@
 <p>test works!</p>
+
+<ul>
+    <li *ngFor='let user of users'>
+        <h3>{{user.id}}</h3>{{user.email}}, {{user.name}}
+    </li>
+</ul>

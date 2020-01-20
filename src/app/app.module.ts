@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { TestComponent } from './test/test.component';
+import { TestComponent } from './CRUD/CRUD.component';
 
 @NgModule({
   declarations: [

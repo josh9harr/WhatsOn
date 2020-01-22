@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CRUDService } from '../crud.service';
 import { Users } from 'src/assets/Users.model';
-// import { from } from 'rxjs';
-// import { create } from 'domain';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss']
+  selector: 'app-CRUD',
+  templateUrl: './CRUD.component.html',
+  styleUrls: ['./CRUD.component.scss']
 })
-export class TestComponent implements OnInit {
+export class CRUDComponent implements OnInit {
   users: Users[];
-
-
-  constructor(private CRUDService: CRUDService) { }
+  name = new FormControl('james');
+  email = new FormControl('007@gmail.com');
+  pass = new FormControl('bond');
+  public newUser: Users;
+  constructor(private CRUDService: CRUDService) { 
+    
+  }
 
   ngOnInit() {
     this.CRUDService.getUser().subscribe(data => {
@@ -27,7 +30,13 @@ export class TestComponent implements OnInit {
     });
   }
 
+
     create(user: Users){
+      this.newUser = new Users;
+      this.newUser.email = this.email.value;
+      this.newUser.name = this.name.value;
+      this.newUser.password = this.pass.value;
+      console.log('something should be happening')
       this.CRUDService.createUser(user);
     }
 

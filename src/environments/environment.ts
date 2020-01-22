@@ -16,6 +16,10 @@ export const environment = {
   }
 };
 
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

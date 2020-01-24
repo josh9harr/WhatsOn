@@ -1,0 +1,21 @@
+<h2>
+    Search Movie
+</h2>
+<div id="search">
+        <input name='searchBar' type="text" [formControl]='searchBar'/>
+        <button (click)='search()' >Search</button>
+</div>
+
+<div id="movieList">
+    <ul>
+        <li *ngFor='let media of list' [class.selected]='media === selectedMedia' (click)="select(media)">
+            <div class="clickableMedia">
+                <img *ngIf='media.poster_120x171' src='{{media.poster_120x171}}' alt="{{media.title}} poster" />
+                <img *ngIf='media.artwork_208x117' src='{{media.artwork_208x117}}' alt="{{media.title}} poster" />
+                <h3>
+                    {{media.title}}
+                </h3>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -16,6 +16,8 @@ import { CRUDComponent } from './CRUD/CRUD.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
+import { DisplayComponent } from './display/display.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,11 @@ import { HomeComponent } from './home/home.component';
     SigninComponent,
     SignupComponent,
     HomeComponent,
+    SearchComponent,
+    DisplayComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -36,7 +41,8 @@ import { HomeComponent } from './home/home.component';
     AngularFireStorageModule, // Only required for storage features
     AppRoutingModule,
     RouterModule.forRoot([
-      {path: 'home', component: HomeComponent},
+      {path: 'home', component: SearchComponent},
+      {path: 'display/:id', component: DisplayComponent},
       {path: '', redirectTo: "/home", pathMatch: 'full'},
     ])
   ],

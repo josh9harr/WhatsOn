@@ -22,9 +22,9 @@ export class CRUDService {
   }
 
   //updates user information
-  updateUser(user: Users){
-    this.firestore.doc('users/'+user.id).update(user);
-  }
+  // updateUser(user: Users){
+  //   this.firestore.doc('users/'+user.id).update(user);
+  // }
 
   //Deletes a user
   deleteUser(userId: string){

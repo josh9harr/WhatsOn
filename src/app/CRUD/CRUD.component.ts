@@ -40,9 +40,9 @@ export class CRUDComponent implements OnInit {
       this.CRUDService.createUser(user);
     }
 
-    update(user: Users){
-      this.CRUDService.updateUser(user)
-    }
+    // update(user: Users){
+    //   this.CRUDService.updateUser(user)
+    // }
 
     delete(id: string){
       this.CRUDService.deleteUser(id)

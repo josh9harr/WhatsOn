@@ -9,15 +9,21 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   start = 'http://api-public.guidebox.com/v2/';
-  key = '47921ad7902cbec22165877b54dce3609cb70bfc';
+  key = '?api_key=47921ad7902cbec22165877b54dce3609cb70bfc';
   type = 'movie';
   field = 'title';
-  searched = '';
 
-  searchData(){
-    let data = this.http.get(`${this.start}/search/v2/search?api_key=${this.key}
-    &type=${this.type}&field=${this.field}&query=${this.serached}`);
+  searchMovieData(search){
+    let data = this.http.get(`${this.start}search${this.key}
+    &type=${this.type}&field=${this.field}&query=${search}`);
     return data
+  }
+
+  searchShowData(search){
+    let data = this.http.get(
+      `${this.start}search${this.key}&type=show&field=${this.field}&query=${search}`
+      );
+      return data
   }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

@@ -1,1 +1,85 @@
-<p>display works!</p>
+<h3>Display Page: {{this.type}}</h3>
+
+<div id="movieDisplay" *ngIf='this.type == "movies"'>
+    <h1>{{media.title}}</h1>
+    <img src="{{media.poster_400x570}}" alt="{{media.title}} Poster" /><br>
+    <!-- <h3>Alternate Titles: </h3> -->
+    <!-- <div *ngFor='let title in media.alternate_titles'>{{title}}</div> -->
+    <b>Rating: </b> {{media.rating}}<br>
+    <b>Original Release Date: </b>{{media.release_date}}<br>
+    <b>Overview: </b>{{media.overview}}<br>
+    <b>Genre: </b> <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
+    <!-- <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div> -->
+    <b>Tags: </b> <div id="tags" *ngFor='let tag of media.tags'>{{tag.tag}}</div>
+
+    <div id="free" *ngIf='media.free_web_sources.length != 0'>
+        <b>Free Links</b>
+        <div id="freeLinks" *ngFor='let link of media.free_web_sources'>
+            <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+        </div>
+    </div>
+
+    <div id="purchase" *ngIf='media.purchase_web_sources.length != 0'>
+        <b>Purchase Links:</b>
+        <div id="purchaseLinks" *ngFor='let link of media.purchase_web_sources'>
+            <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+        </div>
+    </div>
+
+    <div id='subscription' *ngIf='media.subscription_web_sources.length != 0'>
+            <b>Subscription Links:</b>
+            <div id="subscriptionLinks" *ngFor='let link of media.subscription_web_sources'>
+                <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                <!-- <p>{{safeLink}}</p>
+                <iframe src="{{safeLink}}"></iframe> -->
+            </div>
+        </div>
+
+    <div id="castDisplay">
+        <b>Cast: </b> <div id="cast" *ngFor="let actor of media.cast">
+            <b>
+                {{actor.name}}
+            </b>
+            <img src="{{actor.image}}" alt="{{actor.name}} Image" width="100"/>
+            {{actor.character_name}}
+        </div>
+    </div>
+
+    <div id="watch">
+    </div>
+
+</div>
+
+
+<div id="showDisplay" *ngIf='this.type == "shows"'>
+    <img src="{{media.artwork_304x171}}" alt="{{media.title}} Artwork" />
+    <h1>{{media.title}}</h1>
+    <img src="{{media.poster}}" alt="{{media.title}} Poster" /><br>
+    <!-- <h3>Alternate Titles: </h3> -->
+    <!-- <div *ngFor='let title in media.alternate_titles'>{{title}}</div> -->
+    <b>Rating: </b> {{media.rating}}<br>
+    <b>Original Release Date: </b>{{media.first_aired}}<br>
+    <b>Overview: </b>{{media.overview}}<br>
+    <b>Genre: </b> <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
+    <!-- <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div> -->
+    <b>Tags: </b> <div id="tags" *ngFor='let tag of media.tags'>{{tag.tag}}</div>
+    <div id="castDisplay">
+        <b>Cast: </b> <div id="cast" *ngFor="let actor of media.cast">
+            <b>
+                {{actor.name}}
+            </b>
+            <img src="{{actor.image}}" alt="{{actor.name}} Image" width="100"/>
+            {{actor.character_name}}
+        </div>
+    </div>
+
+    <div id="episodeList" *ngFor='let data of episodes'>
+        <h2>Episodes</h2>
+        <div id="episode"></div>
+    </div>
+
+<div>
+
+
+    </div>
+</div>

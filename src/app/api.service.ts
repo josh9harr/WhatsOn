@@ -26,4 +26,24 @@ export class ApiService {
       return data
   }
 
+  displayMedia(thing, id){
+    let data = this.http.get(
+      `${this.start}${thing}/${id}${this.key}`
+    );
+    return data
+  }
+
+  displayAllEpisodes(showId){
+    let data = this.http.get(
+      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=35`
+    )
+    return data
+  }
+  displayEpisodeBySeason(showId, season){
+    let data = this.http.get(
+      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=35&season=${season}`
+    )
+    return data
+  }
+
 }

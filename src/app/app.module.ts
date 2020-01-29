@@ -18,6 +18,8 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { DisplayComponent } from './display/display.component';
+import { ProfileComponent } from './profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -41,9 +43,10 @@ import { DisplayComponent } from './display/display.component';
     AngularFireStorageModule, // Only required for storage features
     AppRoutingModule,
     RouterModule.forRoot([
-      {path: 'home', component: SearchComponent},
-      {path: 'display/:id', component: DisplayComponent},
       {path: '', redirectTo: "/home", pathMatch: 'full'},
+      {path: 'home', component: HomeComponent},
+      {path: 'display/:type/:id', component: DisplayComponent},
+      {path: 'profile', component: ProfileComponent}
     ])
   ],
   providers: [],

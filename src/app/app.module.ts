@@ -12,7 +12,6 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 //Components
-import { CRUDComponent } from './CRUD/CRUD.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
@@ -24,7 +23,6 @@ import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
-    CRUDComponent,
     SigninComponent,
     SignupComponent,
     HomeComponent,

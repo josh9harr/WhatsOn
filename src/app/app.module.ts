@@ -30,6 +30,7 @@ import { ProfileComponent } from './profile/profile.component';
     HomeComponent,
     SearchComponent,
     DisplayComponent,
+    ProfileComponent,
   ],
   imports: [
     HttpClientModule,
@@ -46,7 +47,9 @@ import { ProfileComponent } from './profile/profile.component';
       {path: '', redirectTo: "/home", pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
       {path: 'display/:type/:id', component: DisplayComponent},
-      {path: 'profile', component: ProfileComponent}
+      {path: 'profile', component: ProfileComponent},
+      {path: 'signup', component: SignupComponent},
+      {path: 'signin', component: SigninComponent},
     ])
   ],
   providers: [],

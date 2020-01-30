@@ -32,12 +32,12 @@ export class CRUDComponent implements OnInit {
 
 
     create(user: Users){
-      this.newUser = new Users;
-      this.newUser.email = this.email.value;
-      this.newUser.name = this.name.value;
-      this.newUser.password = this.pass.value;
-      console.log('something should be happening')
-      this.CRUDService.createUser(user);
+      // this.newUser = new Users;
+      // this.newUser.email = this.email.value;
+      // this.newUser.name = this.name.value;
+      // this.newUser.password = this.pass.value;
+      // console.log('something should be happening')
+      // this.CRUDService.createUser(user);
     }
 
     // update(user: Users){

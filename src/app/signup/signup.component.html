@@ -1,1 +1,9 @@
-<p>signup works!</p>
+<h1>Sign Up Page</h1>
+
+<div id="signUp">
+    <input type="text" placeholder="First" [(ngModel)] ="fname">
+    <input type="text" placeholder="Last" [(ngModel)] ="lname">
+    <input type="text" placeholder="Email Address" [(ngModel)] ="email">
+    <input type="text" placeholder="Password" [(ngModel)] ="password">
+    <button (click)='createUser(fname,lname,email,password)'>Sign Up</button>
+</div>

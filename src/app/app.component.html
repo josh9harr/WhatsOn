@@ -2,11 +2,11 @@
         <nav>
             <div id="Home"><a href="/home">What's On?</a></div>
             <app-search id="searchBox"></app-search>
-            <div id="lisu" >
+            <div id="lisu" *ngIf='Signedin!=true'>
               <div id="login"><a href="/signin">Sign In</a></div>
               <div id="signup"><a href="/signup">Sign Up</a></div>
             </div>
-            <div id="profile" ><a href="/profile">Profile</a></div>
+            <div id="profile" *ngIf='Signedin==true'><a href="/profile">Profile</a></div>
         </nav>
     </div>
 <router-outlet></router-outlet>

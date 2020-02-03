@@ -1,0 +1,23 @@
+<div id="searchResults">
+    <ul>
+        <li *ngFor='let media of list' [class.selected]='media === selectedMedia'>
+            <div class="clickableMedia">
+                <img class="poster"
+                *ngIf='media.poster_120x171' 
+                src='{{media.poster_120x171}}' 
+                alt="{{media.title}} poster"
+                (click)="selectMovie(media)" 
+                />
+                <img class="poster"
+                *ngIf='media.artwork_208x117' 
+                src='{{media.artwork_208x117}}' 
+                alt="{{media.title}} poster" 
+                (click)="selectShow(media)"
+                />
+                <h3>
+                    {{media.title}}
+                </h3>
+            </div>
+        </li>
+    </ul>
+</div>

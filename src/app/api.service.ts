@@ -9,7 +9,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   start = 'http://api-public.guidebox.com/v2/';
-  key = '?api_key=47921ad7902cbec22165877b54dce3609cb70bfc';
+  key = '?api_key=a5939041bafb193157493411e07ff0dca59f424b';
+  // 47921ad7902cbec22165877b54dce3609cb70bfc';
   type = 'movie';
   field = 'title';
 
@@ -35,7 +36,7 @@ export class ApiService {
 
   displayAllEpisodes(showId){
     let data = this.http.get(
-      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=35`
+      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=50&reverse_ordering=true`
     )
     return data
   }

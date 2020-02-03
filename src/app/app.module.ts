@@ -11,6 +11,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 //Components
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
@@ -18,6 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { DisplayComponent } from './display/display.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ResultComponent } from './result/result.component';
+
 
 
 @NgModule({
@@ -29,6 +32,7 @@ import { ProfileComponent } from './profile/profile.component';
     SearchComponent,
     DisplayComponent,
     ProfileComponent,
+    ResultComponent,
   ],
   imports: [
     HttpClientModule,
@@ -48,6 +52,7 @@ import { ProfileComponent } from './profile/profile.component';
       {path: 'profile', component: ProfileComponent},
       {path: 'signup', component: SignupComponent},
       {path: 'signin', component: SigninComponent},
+      {path: 'results/:title', component: ResultComponent}
     ])
   ],
   providers: [],

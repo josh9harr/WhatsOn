@@ -3,7 +3,11 @@ import { ApiService } from '../api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser'
+import { Pipe, PipeTransform } from '@angular/core';
 
+@Pipe({
+  name: 'safe'
+})
 
 @Component({
   selector: 'app-display',
@@ -18,6 +22,7 @@ export class DisplayComponent implements OnInit {
   episodeData;
   episodes;
   safeLink;
+  newLink;
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -28,25 +33,46 @@ export class DisplayComponent implements OnInit {
     
     ngOnInit() {
       this.getData()
+      if(this.type=="shows"){
+        this.getAllEpisodes(this.id)
+      }
     };
     
     getData(){
       this.apiService.displayMedia(this.type,this.id).subscribe(data => [
         this.media = data,
-        this.safeLink = this.sanitizer.sanitize(SecurityContext.URL,this.media.subscription_web_sources[0].link),
-        console.log(this.safeLink),
-        // bypassSecurityTrustResourceUrl(this.media.subscription_web_sources[0].link),
-        console.log(this.media)
+        //if(this.media.subscription_web_sources.length() !=0){
+
+          // this.safeLink = this.sanitizer.sanitize(SecurityContext.URL,this.media.subscription_web_sources[0].link),
+          // console.log(this.safeLink),
+          // // bypassSecurityTrustResourceUrl(this.media.subscription_web_sources[0].link),
+          // console.log(this.media)
+        //}
       ])
       
     };
+
+    getAllEpisodes(id){
+      this.apiService.displayAllEpisodes(this.id).subscribe(data => {
+        this.episodeData = data;
+        this.episodes = this.episodeData.results;
+        console.log(this.episodeData)
+        console.log(this.episodes)
+      })
+    }
     
     getEpisodes(id, season){
       this.apiService.displayEpisodeBySeason(this.id,season).subscribe(data => {
         this.episodeData = data,
         this.episodes = this.episodeData.results,
+        this.newLink = this.episodes[0].subscription_web_sources[0].link;
         console.log(this.episodeData)
         console.log(this.episodes)
+        console.log(this.newLink),
+        this.safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.newLink),
+        //this.sanitizer.sanitize(SecurityContext.URL,this.episodes[0].subscription_web_sources[0].link),
+        console.log(this.safeLink),
+        console.log(this.media)
       })
     };
 

@@ -1,27 +1,3 @@
 
-<div id="search">
-        <input name='searchBar' type="text" [formControl]='searchBar'/>
-        <button (click)='search()' >Search</button>
-</div>
-
-<div id="movieList">
-    <ul>
-        <li *ngFor='let media of list' [class.selected]='media === selectedMedia'>
-            <div class="clickableMedia">
-                <img *ngIf='media.poster_120x171' 
-                src='{{media.poster_120x171}}' 
-                alt="{{media.title}} poster"
-                (click)="selectMovie(media)" 
-                />
-                <img *ngIf='media.artwork_208x117' 
-                src='{{media.artwork_208x117}}' 
-                alt="{{media.title}} poster" 
-                (click)="selectShow(media)"
-                />
-                <h3>
-                    {{media.title}}
-                </h3>
-            </div>
-        </li>
-    </ul>
-</div>
+        <input id='searchBar' placeholder='Search' type="text" [(ngModel)]='searched'/>
+        <button id="searchBtn" (click)='select(searched)' >Search</button>

@@ -1,0 +1,39 @@
+@import '../../styles.scss';
+
+#showDisplay {
+    position: relative;
+}
+
+.background{
+    width: 96%;
+    margin: 0% 2%;
+    // background-image: linear-gradient(to right, transparent 60%, black 100%);
+
+}
+
+.description {
+    position: absolute;
+    width: 95%;
+    top: 8px;
+    left: 16px;
+    background: linear-gradient(to right, $orange 30%, transparent);
+    padding: 10px;
+
+}
+
+.poster {
+    border: solid $black 2px;
+    width: 200px;
+}
+
+.castDisplay {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+
+.cast{
+    padding: 5px;
+}
+

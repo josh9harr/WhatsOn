@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit {
 
 
 select(title){
-  this.router.navigate([`results/${title}`])
+  window.location.replace(`results/${title}`)
 }
 
 }

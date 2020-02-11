@@ -20,6 +20,9 @@ import { SearchComponent } from './search/search.component';
 import { DisplayComponent } from './display/display.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ResultComponent } from './result/result.component';
+import { ChannelsComponent } from './channels/channels.component';
+import { ChannelShowsComponent } from './channel-shows/channel-shows.component';
+import { compileBaseDefFromMetadata } from '@angular/compiler';
 
 
 
@@ -33,6 +36,8 @@ import { ResultComponent } from './result/result.component';
     DisplayComponent,
     ProfileComponent,
     ResultComponent,
+    ChannelsComponent,
+    ChannelShowsComponent,
   ],
   imports: [
     HttpClientModule,
@@ -52,7 +57,9 @@ import { ResultComponent } from './result/result.component';
       {path: 'profile', component: ProfileComponent},
       {path: 'signup', component: SignupComponent},
       {path: 'signin', component: SigninComponent},
-      {path: 'results/:title', component: ResultComponent}
+      {path: 'results/:title', component: ResultComponent},
+      {path: 'channels', component: ChannelsComponent},
+      {path: 'channels/:name', component: ChannelShowsComponent}
     ])
   ],
   providers: [],

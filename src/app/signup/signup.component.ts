@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CRUDService } from 'src/app/crud.service'
 import { AngularFireAuth } from "@angular/fire/auth";
-import { Router } from "@angular/router"
+import { Router } from "@angular/router";
+import * as firebase from "firebase/app";
+
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +21,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.router.navigate(['/profile'])
+        window.location.replace('/profile')
       }
     });
   }
@@ -32,7 +34,24 @@ export class SignupComponent implements OnInit {
       password: password,
     }
     this.CRUD.signUp(email, password, userData);
-    this.router.navigate(['/profile'])
+    window.location.replace('/profile')
   }
 
+  googleSignUp() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+}
+
+  facebookSignUp(){
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      var user = result.user;
+    }).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      var email = error.email;
+      var credential = error.credential;
+    });
+  
+  }
 }

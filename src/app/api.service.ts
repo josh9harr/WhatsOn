@@ -36,7 +36,7 @@ export class ApiService {
 
   displayAllEpisodes(showId){
     let data = this.http.get(
-      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=50&reverse_ordering=true`
+      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=25&reverse_ordering=true`
     )
     return data
   }
@@ -45,6 +45,36 @@ export class ApiService {
       `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=35&season=${season}`
     )
     return data
+  }
+
+  getChannels(){
+    let data = this.http.get(
+      `${this.start}channels${this.key}&limit=24`
+    )
+    return data
+  }
+
+  getMoreChannels(page: number){
+    let num = page*24;
+    let data = this.http.get(
+      `${this.start}channels${this.key}&limit=24&offset=${num}`
+    )
+    return data;
+  }
+
+  getChannelShows(name: string){
+    let data = this.http.get(
+      `${this.start}shows${this.key}&channel=${name}&limit=24`
+    )
+    return data
+  }
+
+  getMoreShows(name: string, page: number){
+    let num = page*24;
+    let data = this.http.get(
+      `${this.start}shows${this.key}&channel=${name}&limit=24&offset=${num}`
+    )
+    return data;
   }
 
 }

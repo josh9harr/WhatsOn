@@ -1,16 +1,17 @@
-<h3>Display Page: {{this.type}}</h3>
-
 <div id="movieDisplay" *ngIf='this.type == "movies"'>
-    <h1>{{media.title}}</h1>
-    <img src="{{media.poster_400x570}}" alt="{{media.title}} Poster" /><br>
+    <h1 class="name">{{media.title}}</h1>
+    <img class="poster" src="{{media.poster_400x570}}" alt="{{media.title}} Poster" /><br>
     <!-- <h3>Alternate Titles: </h3> -->
     <!-- <div *ngFor='let title in media.alternate_titles'>{{title}}</div> -->
-    <b>Rating: </b> {{media.rating}}<br>
-    <b>Original Release Date: </b>{{media.release_date}}<br>
-    <b>Overview: </b>{{media.overview}}<br>
-    <b>Genre: </b> <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
-    <!-- <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div> -->
-    <b>Tags: </b> <div id="tags" *ngFor='let tag of media.tags'>{{tag.tag}}</div>
+    <div class="description">
+
+        <b>Rating: </b> {{media.rating}}<br>
+        <b>Original Release Date: </b>{{media.release_date}}<br>
+        <b>Overview: </b>{{media.overview}}<br>
+        <b>Genre: </b> <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
+        <!-- <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div> -->
+        <!-- <b>Tags: </b> <div id="tags" *ngFor='let tag of media.tags'>{{tag.tag}}</div> -->
+    </div>
 
     <div id="free" *ngIf='media.free_web_sources.length != 0'>
         <b>Free Links</b>
@@ -35,8 +36,8 @@
             </div>
         </div>
 
-    <div id="castDisplay">
-        <b>Cast: </b> <div id="cast" *ngFor="let actor of media.cast">
+    <div class="castDisplay">
+        <b>Cast: </b> <div class="cast" *ngFor="let actor of media.cast">
             <b>
                 {{actor.name}}
             </b>
@@ -52,19 +53,22 @@
 
 
 <div id="showDisplay" *ngIf='this.type == "shows"'>
-    <img src="{{media.artwork_304x171}}" alt="{{media.title}} Artwork" />
-    <h1>{{media.title}}</h1>
-    <img src="{{media.poster}}" alt="{{media.title}} Poster" /><br>
+    <img class="background" src="{{media.artwork_608x342}}" alt="{{media.title}} Artwork" />
     <!-- <h3>Alternate Titles: </h3> -->
     <!-- <div *ngFor='let title in media.alternate_titles'>{{title}}</div> -->
-    <b>Rating: </b> {{media.rating}}<br>
-    <b>Original Release Date: </b>{{media.first_aired}}<br>
-    <b>Overview: </b>{{media.overview}}<br>
-    <b>Genre: </b> <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
-    <!-- <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div> -->
-    <b>Tags: </b> <div id="tags" *ngFor='let tag of media.tags'>{{tag.tag}}</div>
-    <div id="castDisplay">
-        <b>Cast: </b> <div id="cast" *ngFor="let actor of media.cast">
+    <div class="description">
+        <h1 class="name">{{media.title}}</h1>
+        <img class="poster" src="{{media.poster}}" alt="{{media.title}} Poster"/><br>
+        {{media.rating}} {{media.first_aired}}
+        <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
+        <p>
+            {{media.overview}}
+        </p>
+        <!-- <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div> -->
+    </div>
+    <!-- <b>Tags: </b> <div id="tags" *ngFor='let tag of media.tags'>{{tag.tag}}</div> -->
+    <div class="castDisplay">
+        <b>Cast: </b> <div class="cast" *ngFor="let actor of media.cast">
             <b>
                 {{actor.name}}
             </b>

@@ -9,27 +9,50 @@ import { Users } from '../assets/Users.model'
 import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
 
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class CRUDService {
-
+  userData;
+  db = firebase.firestore()
   constructor(
     private firestore: AngularFirestore,
     private auth: AngularFireAuth,
     ) { }
 
   //gets users from database
-  getUser() {
-    return this.firestore.collection('users').snapshotChanges();
+  getUser(id: string) {
+    return this.firestore.doc(`users/${id}`).get();
   }
 
-  //Creates a user for the database
-  createUser(user: Users) {
-    return this.firestore.collection('users').add(user)
+  editUser(id: string,user){
+    return this.firestore.doc(`users/${id}`).update(user)
   }
+
+  addToList(user, media, list){
+    if(media.imdb){
+      media = {
+        id: media.id, 
+        imdb: media.imdb,
+        themoviedb: media.themoviedb,
+        title: media.title,
+      }
+    }else{
+      media = {
+        id: media.id, 
+        imdb: media.imdb_id,
+        tvdb: media.tvdb,
+        themoviedb: media.themoviedb,
+        title: media.title,
+      }
+    }
+    return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.title).set(media);
+  }
+
+  // //Creates a user for the database
+  // createUser(user: Users) {
+  //   return this.firestore.collection('users').add(user)
+  // }
 
   //updates user information
   // updateUser(user: Users){
@@ -48,7 +71,8 @@ export class CRUDService {
       const user = firebase.auth().currentUser;
       if(user!=null) {
         let data = JSON.parse(JSON.stringify(userData));
-        this.firestore.collection('users').doc(user.uid).set(data)
+        this.firestore.collection('users').doc(user.uid).set(data);
+        this.firestore.collection('users').doc(user.uid).collection('Favorites');
     }
     });
   }

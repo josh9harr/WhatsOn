@@ -1,0 +1,9 @@
+<h1>Channels</h1>
+
+<ul  id="channelList">
+    <li id="channel" *ngFor='let channel of channelList' (click)='selected(channel.name)'>
+        <img class="channelImage" src="{{channel.artwork_304x171}}" alt="{{channel.name}}"/>
+        
+    </li>
+</ul>
+<button id="moreBtn" (click)='showMore()'>Show More</button>

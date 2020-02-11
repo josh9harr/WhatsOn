@@ -1,0 +1,16 @@
+@import '../../styles.scss';
+
+
+#showList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.show {
+    width: 304px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 3px $orange solid;
+}

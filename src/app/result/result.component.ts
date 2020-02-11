@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { CRUDService } from '../crud.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireAuth } from "@angular/fire/auth";
+
 
 
 @Component({
@@ -19,7 +22,9 @@ export class ResultComponent implements OnInit {
   selectedMedia;
   constructor(
     private apiService: ApiService,
+    private crudService: CRUDService,
     private router: Router,
+    private fireAuth: AngularFireAuth,
     private route: ActivatedRoute,
   ) { }
 
@@ -28,7 +33,6 @@ export class ResultComponent implements OnInit {
   }
 
   search(title){
-    console.log(title)
     this.movie = this.apiService.searchMovieData(title).subscribe(data => {
       this.movie = data,
       this.list = this.movie.results
@@ -46,11 +50,20 @@ export class ResultComponent implements OnInit {
   }
 
   selectMovie(media): void {
-    this.router.navigate(['/display/','movies',media.id])
+    window.location.replace(`/display/movies${media.id}`);
   }
 
   selectShow(media): void {
-    this.router.navigate(['/display/','shows',media.id])
+    window.location.replace(`/display/shows${media.id}`);
   }
+
+  addToList(media){
+    this.fireAuth.auth.onAuthStateChanged((user) => {
+      console.log(media)
+      if(user){
+        this.crudService.addToList(user,media,'Favorites');
+      }
+    }
+  )}
 
 }

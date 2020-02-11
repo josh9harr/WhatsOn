@@ -14,10 +14,20 @@ export class AppComponent {
 
 
   constructor(private CRUDService: CRUDService, private fireAuth: AngularFireAuth) {
-    this.fireAuth.auth.onAuthStateChanged((user) => {
-      if (user) {
+    let user = this.fireAuth.auth.currentUser;
+    console.log(user);
+      if (user != null) {
         this.Signedin = true;
+      }else{
+        this.Signedin = false;
       }
-    });
+      console.log('hello')
+    
   }
+
+  async check(){
+    await this.fireAuth.auth.currentUser
+  }
+
+
 }

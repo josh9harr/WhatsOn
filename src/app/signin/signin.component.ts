@@ -20,34 +20,25 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if(user){
-        this.router.navigate(['/home'])
+        window.location.replace('/home')
       }
     });
   }
 
   googleSignUp() {
       var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider)
+      firebase.auth().signInWithPopup(provider)
   }
 
   facebookSignUp(){
     var provider = new firebase.auth.FacebookAuthProvider();
-
     firebase.auth().signInWithPopup(provider).then(function(result) {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      //var token = result.credential.accessToken;
-      // The signed-in user info.
       var user = result.user;
-      // ...
     }).catch(function(error) {
-      // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-      // The email of the user's account used.
       var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
       var credential = error.credential;
-      // ...
     });
 
 
@@ -59,7 +50,7 @@ export class SigninComponent implements OnInit {
     await this.CRUD.signIn(email,password)
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.router.navigate(['/profile'])
+        window.location.replace('/profile')
       } else {
         console.log("Not Loggin In")
       }

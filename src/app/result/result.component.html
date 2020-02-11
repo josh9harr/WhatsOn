@@ -1,5 +1,5 @@
-<div id="searchResults">
-    <ul>
+<div>
+    <ul id="searchResults">
         <li *ngFor='let media of list' [class.selected]='media === selectedMedia'>
             <div class="clickableMedia">
                 <img class="poster"
@@ -9,14 +9,15 @@
                 (click)="selectMovie(media)" 
                 />
                 <img class="poster"
-                *ngIf='media.artwork_208x117' 
-                src='{{media.artwork_208x117}}' 
+                *ngIf='media.artwork_304x171' 
+                src='{{media.artwork_304x171}}' 
                 alt="{{media.title}} poster" 
                 (click)="selectShow(media)"
                 />
                 <h3>
                     {{media.title}}
                 </h3>
+                <button (click)='addToList(media)'>Add Favorites</button>
             </div>
         </li>
     </ul>

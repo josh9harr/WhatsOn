@@ -1,0 +1,16 @@
+@import '../../styles.scss';
+
+
+#channelList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#channel {
+    width: 350px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 3px $orange solid;
+}

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { MovieDBService } from '../movie-db.service';
 import { CRUDService } from '../crud.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from "@angular/fire/auth";
-
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-result',
@@ -15,14 +15,17 @@ import { AngularFireAuth } from "@angular/fire/auth";
 })
 export class ResultComponent implements OnInit {
   movie;
-  show;
   title = this.route.snapshot.params.title
-  list = [];
+  imageBase = 'https://image.tmdb.org/t/p/';
+  size = 'original';
+  list;
+  results;
 
   selectedMedia;
   constructor(
     private apiService: ApiService,
     private crudService: CRUDService,
+    private movieDBService: MovieDBService,
     private router: Router,
     private fireAuth: AngularFireAuth,
     private route: ActivatedRoute,
@@ -33,29 +36,36 @@ export class ResultComponent implements OnInit {
   }
 
   search(title){
-    this.movie = this.apiService.searchMovieData(title).subscribe(data => {
+
+    this.movieDBService.search(title).subscribe(data => {
       this.movie = data,
       this.list = this.movie.results
       console.log(this.list)
-      
     })
-    this.show = this.apiService.searchShowData(title).subscribe(data => {
-      this.show = data,
-      this.show.results.forEach(element => {
-        this.list.push(element)
-      });
-      console.log(this.list)
-      
-    })
+
   }
 
   selectMovie(media): void {
-    window.location.replace(`/display/movies${media.id}`);
+
+    this.apiService.getMovieFromMovieDB(media.media_type,media.id).subscribe(stuff => {
+      this.results = stuff
+      window.location.replace(`/display/movies/${this.results.id}`);
+    });
+
   }
 
   selectShow(media): void {
-    window.location.replace(`/display/shows${media.id}`);
+    this.apiService.getMovieFromMovieDB(media.media_type,media.id).subscribe(stuff => {
+      this.results = stuff
+      window.location.replace(`/display/shows/${this.results.id}`);
+    });
   }
+
+  // selectChannel(media){
+  //   window.location.replace(`/display/channel/${media.name}`);
+  // }
+
+
 
   addToList(media){
     this.fireAuth.auth.onAuthStateChanged((user) => {

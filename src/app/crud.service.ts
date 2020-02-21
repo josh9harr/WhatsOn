@@ -9,6 +9,7 @@ import { Users } from '../assets/Users.model'
 import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,6 +30,11 @@ export class CRUDService {
     return this.firestore.doc(`users/${id}`).update(user)
   }
 
+  readList(id: string, list: 'Favorites'){
+    return this.firestore.collection(`users`).doc(id).collection(list).snapshotChanges();
+
+  }
+
   addToList(user, media, list){
     if(media.imdb){
       media = {
@@ -36,6 +42,7 @@ export class CRUDService {
         imdb: media.imdb,
         themoviedb: media.themoviedb,
         title: media.title,
+        poster: media.poster_120x171,
       }
     }else{
       media = {
@@ -44,6 +51,7 @@ export class CRUDService {
         tvdb: media.tvdb,
         themoviedb: media.themoviedb,
         title: media.title,
+        poster: media.artwork_304x171,
       }
     }
     return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.title).set(media);
@@ -55,26 +63,48 @@ export class CRUDService {
   // }
 
   //updates user information
-  // updateUser(user: Users){
-  //   this.firestore.doc('users/'+user.id).update(user);
-  // }
+  updateUser(user: Users){
+    this.firestore.doc('users/'+user).update(user);
+  }
 
   //Deletes a user
   deleteUser(userId: string){
     this.firestore.doc('users/'+ userId).delete();
   }
 
+  // addUser(){
+  //   const user = firebase.auth().currentUser;
+  //     if(user!=null) {
+  //       let userData = {
+  //         displayName: user.displayName,
+  //         email: user.email,
+  //       }
+  //       let data = JSON.parse(JSON.stringify(userData));
+  //       this.firestore.collection('users').doc(user.uid).set(data);
+  //       // this.firestore.collection('users').doc(user.uid);
+  //       this.firestore.collection('users').doc(user.uid).collection('SignIns').doc('facebook').set(user);
+  //     }
+  // }
+
+
   async signUp(email: string, password: string, userData) {
     await firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => {
       console.log(error)
     }).then(_ => {
+      // this.addUser();
       const user = firebase.auth().currentUser;
       if(user!=null) {
         let data = JSON.parse(JSON.stringify(userData));
         this.firestore.collection('users').doc(user.uid).set(data);
         this.firestore.collection('users').doc(user.uid).collection('Favorites');
+        user.updateProfile({
+          displayName: `${data.fname} ${data.lname}`
+        })
     }
+    }).catch(error => {
+      console.log(error)
     });
+
   }
 
   async signIn(email: string, password: string){
@@ -82,7 +112,7 @@ export class CRUDService {
       await this.auth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       .then(async () =>{
         await firebase.auth().signInWithEmailAndPassword(email,password)
-        .then( () => {}).catch(function (error) {
+        .catch(function (error) {
           console.log('Incorrect Email or Password.')
         })
       });

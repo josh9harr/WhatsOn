@@ -1,5 +1,6 @@
 import { Component, OnInit, SecurityContext } from '@angular/core';
 import { ApiService } from '../api.service';
+import { MovieDBService } from '../movie-db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser'
@@ -23,9 +24,15 @@ export class DisplayComponent implements OnInit {
   episodes;
   safeLink;
   newLink;
+  guidebox;
+  results
+  moviedbId;
+  mdbMedia;
+
   constructor(
     private apiService: ApiService,
     private router: Router,
+    private movieDB: MovieDBService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     ) { 
@@ -39,8 +46,17 @@ export class DisplayComponent implements OnInit {
     };
     
     getData(){
-      this.apiService.displayMedia(this.type,this.id).subscribe(data => [
-        this.media = data,
+          this.apiService.displayMedia(this.type,this.id).subscribe(data => {
+            this.media = data,
+            console.log(this.media)
+              this.movieDB.displayMedia(this.type,this.media.themoviedb).subscribe(data => {
+                this.mdbMedia = data
+                console.log(this.mdbMedia)
+              })
+          })
+
+
+
         //if(this.media.subscription_web_sources.length() !=0){
 
           // this.safeLink = this.sanitizer.sanitize(SecurityContext.URL,this.media.subscription_web_sources[0].link),
@@ -48,7 +64,6 @@ export class DisplayComponent implements OnInit {
           // // bypassSecurityTrustResourceUrl(this.media.subscription_web_sources[0].link),
           // console.log(this.media)
         //}
-      ])
       
     };
 

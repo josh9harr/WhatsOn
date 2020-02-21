@@ -32,6 +32,7 @@ export class ChannelsComponent implements OnInit {
     this.apiService.getChannels().subscribe(data => {
       this.other = data;
       this.channelList = this.other.results
+      console.log(this.channelList)
     })
   }
 

@@ -9,29 +9,56 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   start = 'http://api-public.guidebox.com/v2/';
-  key = '?api_key=a5939041bafb193157493411e07ff0dca59f424b';
-  // 47921ad7902cbec22165877b54dce3609cb70bfc';
+  key = '?api_key=fe76f71856ed2436347c8c0a1735deccf5a876e1';
   type = 'movie';
   field = 'title';
+  results;
+  thing;
 
-  searchMovieData(search){
-    let data = this.http.get(`${this.start}search${this.key}
-    &type=${this.type}&field=${this.field}&query=${search}`);
-    return data
-  }
+  // searchMovieData(search){
+  //   let data = this.http.get(`${this.start}search${this.key}
+  //   &type=${this.type}&field=${this.field}&query=${search}`);
+  //   return data
+  // }
 
-  searchShowData(search){
+  // searchShowData(search){
+  //   let data = this.http.get(
+  //     `${this.start}search${this.key}&type=show&field=${this.field}&query=${search}`
+  //     );
+  //     return data
+  // }
+
+  
+  searchChannel(search){
     let data = this.http.get(
-      `${this.start}search${this.key}&type=show&field=${this.field}&query=${search}`
+      `${this.start}search${this.key}&type=channel&query=${search}`
       );
       return data
-  }
+    }
+    
+    getMovieFromMovieDB(type, id){
+      if(type == 'tv'){
+        type='show';
+      }
+      if(type == 'movies'){
+        type='movie'
+      }
 
-  displayMedia(thing, id){
-    let data = this.http.get(
+      let data = this.http.get(
+        `${this.start}search${this.key}&type=${type}&field=id&id_type=themoviedb&query=${id}`
+      );
+      return data
+    }
+
+  displayMedia(thing,id){
+
+    this.thing = this.http.get(
       `${this.start}${thing}/${id}${this.key}`
     );
-    return data
+    console.log(this.thing)
+    return this.thing;
+
+
   }
 
   displayAllEpisodes(showId){
@@ -76,5 +103,6 @@ export class ApiService {
     )
     return data;
   }
+
 
 }

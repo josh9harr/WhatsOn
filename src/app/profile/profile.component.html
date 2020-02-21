@@ -1,7 +1,31 @@
-<h1>Profile Page</h1>
+<div id="profile" *ngIf='edit==false'>
 
-<h1>{{current.fname}} {{current.lname}}</h1>
-<h3>{{current.email}}</h3>
+    <h1>Profile Page</h1>
+    
+    <!-- <h1>{{user.displayName}}</h1>
+    <h1>{{user.email}}</h1> -->
+    <h1 id="name">{{current.displayName}}</h1>
+    <h3 id='email'>{{current.email}}</h3>
+    <button (click)='editUser()'>Edit</button>
+</div>
+
+<div id="link">
+    <button *ngIf='google==false' (click)="linkGoogle()">Link Google</button>
+    <button *ngIf='facebook==false' (click)="linkFacebook()">Link Facebook</button>
+</div>
+
+<div id="edit" *ngIf="edit">
+    <app-signin></app-signin>
+    <input [(ngModel)]="fname" type="text" placeholder="First Name" value={{current.fname}}>
+    <input [(ngModel)]="lname" type="text" placeholder="Last Name" value="{{current.lname}}">
+    <!-- <input type="text" placeholder="Email" value="{{current.email}}">
+    <input type="text" placeholder="Password" value="{{current.password}}"> -->
+    <button id="saveEdit" (click)='saveEdit(fname, lname)'>Save</button>
+    <input [(ngModel)]='email' placeholder="Email" type="text" value={{current.email}}>
+    <button (click)='changeEmail(email)'>Change Email</button>
+    <input [(ngModel)]='password' placeholder="Password" type="text" value={{current.password}}>
+
+    <button (click)='changePassword(password)'>Change Password</button>
+</div>
 
 <button (click)='signout()'>Sign Out</button>
-

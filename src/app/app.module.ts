@@ -11,6 +11,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 //Components
 import { SigninComponent } from './signin/signin.component';
@@ -23,6 +25,9 @@ import { ResultComponent } from './result/result.component';
 import { ChannelsComponent } from './channels/channels.component';
 import { ChannelShowsComponent } from './channel-shows/channel-shows.component';
 import { compileBaseDefFromMetadata } from '@angular/compiler';
+import { MoviesComponent } from './movies/movies.component';
+import { ShowsComponent } from './shows/shows.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -38,6 +43,8 @@ import { compileBaseDefFromMetadata } from '@angular/compiler';
     ResultComponent,
     ChannelsComponent,
     ChannelShowsComponent,
+    MoviesComponent,
+    ShowsComponent,
   ],
   imports: [
     HttpClientModule,
@@ -50,9 +57,12 @@ import { compileBaseDefFromMetadata } from '@angular/compiler';
     AngularFireAuthModule, // Only required for auth features,
     AngularFireStorageModule, // Only required for storage features
     AppRoutingModule,
+    MatTabsModule,
     RouterModule.forRoot([
       {path: '', redirectTo: "/home", pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
+      {path: 'shows', component: ShowsComponent},
+      {path: 'movies', component: MoviesComponent},
       {path: 'display/:type/:id', component: DisplayComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'signup', component: SignupComponent},
@@ -60,7 +70,8 @@ import { compileBaseDefFromMetadata } from '@angular/compiler';
       {path: 'results/:title', component: ResultComponent},
       {path: 'channels', component: ChannelsComponent},
       {path: 'channels/:name', component: ChannelShowsComponent}
-    ])
+    ]),
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

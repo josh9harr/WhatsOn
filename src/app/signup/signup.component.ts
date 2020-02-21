@@ -30,11 +30,12 @@ export class SignupComponent implements OnInit {
     const userData = {
       fname: fname,
       lname: lname,
+      displayName: `${fname} ${lname}`,
       email: email,
       password: password,
     }
     this.CRUD.signUp(email, password, userData);
-    window.location.replace('/profile')
+    // window.location.replace('/profile')
   }
 
   googleSignUp() {

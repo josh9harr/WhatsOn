@@ -1,24 +1,29 @@
+
 <div>
     <ul id="searchResults">
         <li *ngFor='let media of list' [class.selected]='media === selectedMedia'>
-            <div class="clickableMedia">
+            <div class="clickableMedia" (click)="selectShow(media)" *ngIf='media.poster_path != null'>
                 <img class="poster"
-                *ngIf='media.poster_120x171' 
-                src='{{media.poster_120x171}}' 
-                alt="{{media.title}} poster"
-                (click)="selectMovie(media)" 
+                src='{{imageBase}}{{size}}{{media.poster_path}}' 
+                alt="{{media.name}} poster" 
                 />
+                <h3 *ngIf='media.media_type=="tv"'>
+                    {{media.name}}
+                </h3>
+                <h3 *ngIf='media.media_type=="movie"'>{{media.title}}</h3>
+                <button (click)='addToList(media)'>Add Favorites</button>
+            </div>
+
+            <!-- <div class="clickableMedia" (click)="selectMovie(media)" '>
                 <img class="poster"
-                *ngIf='media.artwork_304x171' 
-                src='{{media.artwork_304x171}}' 
+                src='{{imageBase}}{{size}}{{media.poster_path}}' 
                 alt="{{media.title}} poster" 
-                (click)="selectShow(media)"
                 />
                 <h3>
                     {{media.title}}
                 </h3>
                 <button (click)='addToList(media)'>Add Favorites</button>
-            </div>
+            </div> -->
         </li>
     </ul>
 </div>

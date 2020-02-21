@@ -1,0 +1,20 @@
+#page{
+    display: flex;
+    flex-direction: column;
+}
+
+#signIn{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    input {
+        margin: 5px;
+    }
+}
+
+#other{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+
+}

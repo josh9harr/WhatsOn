@@ -1,10 +1,16 @@
-<h1>Sign In</h1>
-<div id="signIn">
-    <input type="text" placeholder="Email Address" [(ngModel)]="email">
-    <input type="text" placeholder="Password" [(ngModel)]="password">
-    <button (click)='signIn(email,password)'>Sign In</button>
+
+<div id="page">
+
+    <h1>Sign In</h1>
+    <div id="signIn">
+        <input type="text" placeholder="Email Address" [(ngModel)]="email">
+        <input type="text" placeholder="Password" [(ngModel)]="password">
+        <button (click)='signIn(email,password)'>Sign In</button>
+    </div>
+    <div id="other">
+        <button id="googleBtn" (click)='googleSignUp()'>Google Sign In</button>
+        <button id="facebookBtn" (click)='facebookSignUp()'>facebook Sign In</button>
+    </div>
+    <a href="signup">Sign Up</a>
+    <a href="home">Home</a>
 </div>
-<button id="googleBtn" (click)='googleSignUp()'>Google Sign In</button>
-<button id="facebookBtn" (click)='facebookSignUp()'>facebook Sign In</button>
-<a href="signup">Sign Up</a>
-<a href="home">Home</a>

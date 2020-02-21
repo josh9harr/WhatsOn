@@ -53,17 +53,22 @@
 
 
 <div id="showDisplay" *ngIf='this.type == "shows"'>
-    <img class="background" src="{{media.artwork_608x342}}" alt="{{media.title}} Artwork" />
+    <div id='backImg'>
+        <img class="background" src="{{media.artwork_608x342}}" alt="{{media.title}} Artwork" />
+    </div>
     <!-- <h3>Alternate Titles: </h3> -->
     <!-- <div *ngFor='let title in media.alternate_titles'>{{title}}</div> -->
     <div class="description">
-        <h1 class="name">{{media.title}}</h1>
-        <img class="poster" src="{{media.poster}}" alt="{{media.title}} Poster"/><br>
-        {{media.rating}} {{media.first_aired}}
-        <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
-        <p>
-            {{media.overview}}
-        </p>
+        <div id="descInfo">
+
+            <h1 class="name">{{media.title}}</h1>
+            <img class="poster" src="{{media.poster}}" alt="{{media.title}} Poster"/><br>
+            {{media.rating}} {{media.first_aired}}
+            <div id="genres" *ngFor="let genre of media.genres">{{genre.title}}</div>
+            <p>
+                {{media.overview}}
+            </p>
+        </div>
         <!-- <div *ngFor='let genre of movieData.genres'>{{genre.name}}</div> -->
     </div>
     <!-- <b>Tags: </b> <div id="tags" *ngFor='let tag of media.tags'>{{tag.tag}}</div> -->

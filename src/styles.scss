@@ -50,6 +50,7 @@ body{
     background-color: $black;
     color: $white;
     font-family: $otherFont;
+    margin-bottom: 15%;
 }
 
 nav{
@@ -77,3 +78,8 @@ nav{
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.row{
+    display: flex;
+    flex-direction: row;
+}

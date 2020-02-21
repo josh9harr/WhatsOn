@@ -55,21 +55,22 @@ export class ApiService {
     this.thing = this.http.get(
       `${this.start}${thing}/${id}${this.key}`
     );
-    console.log(this.thing)
     return this.thing;
 
 
   }
 
-  displayAllEpisodes(showId){
+  getAllEpisodes(showId){
     let data = this.http.get(
       `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=25&reverse_ordering=true`
     )
     return data
   }
-  displayEpisodeBySeason(showId, season){
+  getEpisodeBySeason(showId, season){
+    console.log(showId)
+    console.log(season)
     let data = this.http.get(
-      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=35&season=${season}`
+      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=50&season=${season}&reverse_ordering=true`
     )
     return data
   }

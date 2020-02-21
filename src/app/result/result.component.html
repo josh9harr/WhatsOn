@@ -2,7 +2,7 @@
 <div>
     <ul id="searchResults">
         <li *ngFor='let media of list' [class.selected]='media === selectedMedia'>
-            <div class="clickableMedia" (click)="selectShow(media)" *ngIf='media.poster_path != null'>
+            <div class="clickableMedia" (click)="selectMedia(media)" *ngIf='media.poster_path != null'>
                 <img class="poster"
                 src='{{imageBase}}{{size}}{{media.poster_path}}' 
                 alt="{{media.name}} poster" 
@@ -14,16 +14,6 @@
                 <button (click)='addToList(media)'>Add Favorites</button>
             </div>
 
-            <!-- <div class="clickableMedia" (click)="selectMovie(media)" '>
-                <img class="poster"
-                src='{{imageBase}}{{size}}{{media.poster_path}}' 
-                alt="{{media.title}} poster" 
-                />
-                <h3>
-                    {{media.title}}
-                </h3>
-                <button (click)='addToList(media)'>Add Favorites</button>
-            </div> -->
         </li>
     </ul>
 </div>

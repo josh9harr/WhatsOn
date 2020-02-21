@@ -8,7 +8,7 @@ export class MovieDBService {
 
   constructor(private http: HttpClient) { }
   start = 'https://api.themoviedb.org/3/';
-  key = '?api_key=917bf8547464514e193b8bc4841df69c';
+  key = '?api_key=4233fc015e489c82cdd57b991d85d07b';
 
   searchShow(title){
     let data = this.http.get(
@@ -33,14 +33,29 @@ export class MovieDBService {
 
   displayMedia(type,id){
 
-    if(type == 'shows'){
-      type='tv'
-    }
+    // if(type == 'shows'){
+    //   type='tv'
+    // }
 
     let data = this.http.get(
       `${this.start}${type}/${id}${this.key}`
     );
     return data;
+  }
+
+  getCast(type, id){
+    // if(type == 'shows'){
+    //   type='tv'
+    // }
+    // if(type == 'movies'){
+    //   type='movie'
+    // }
+
+    let data = this.http.get(
+      `${this.start}${type}/${id}/credits${this.key}`
+    );
+    return data;
+  
   }
 
 }

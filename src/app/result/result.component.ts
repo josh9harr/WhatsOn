@@ -45,26 +45,14 @@ export class ResultComponent implements OnInit {
 
   }
 
-  selectMovie(media): void {
+  selectMedia(media) {
+    window.location.replace(`/display/${media.media_type}/${media.id}`);[]
+    
+    // this.apiService.getMovieFromMovieDB(media.media_type,media.id).subscribe(stuff => {
+    //   this.results = stuff
 
-    this.apiService.getMovieFromMovieDB(media.media_type,media.id).subscribe(stuff => {
-      this.results = stuff
-      window.location.replace(`/display/movies/${this.results.id}`);
-    });
-
+    // });
   }
-
-  selectShow(media): void {
-    this.apiService.getMovieFromMovieDB(media.media_type,media.id).subscribe(stuff => {
-      this.results = stuff
-      window.location.replace(`/display/shows/${this.results.id}`);
-    });
-  }
-
-  // selectChannel(media){
-  //   window.location.replace(`/display/channel/${media.name}`);
-  // }
-
 
 
   addToList(media){

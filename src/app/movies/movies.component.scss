@@ -1,0 +1,23 @@
+@import '../../styles.scss';
+
+.movie{
+    margin: 1px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    img{
+        height: 250px;
+    }
+}
+
+.outer{
+    width: 95%;
+}
+
+p, h2,h3 {
+    margin: 0px;
+}
+
+.inner{
+    padding: 2.25% 0%;
+}

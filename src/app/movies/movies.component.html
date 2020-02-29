@@ -1,1 +1,30 @@
-<p>movies works!</p>
+<div class="page">
+
+    <section class="outer" id="popular">
+        <h2>Popular Movies</h2>
+        <div class="inner">
+            <div *ngFor='let movie of popularMovies' class="column" [class.selected]='movie === selectedMovie'>
+                <div class="movie" (click)='selectMovie(movie)' *ngIf='movie.poster_path != null'>
+                    <img src="{{imageBase}}{{size}}{{movie.poster_path}}" alt="{{movie.title}} poster">
+                    <!-- <h3>{{movie.title}}</h3> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div *ngFor='let data of list; let i = index'>
+        <section class="outer">
+            <h2>{{names[i]}}</h2>
+            <a href="">See More ></a>
+            <div class="inner">
+                <div *ngFor='let movie of data' class="column" [class.selected]='movie === selectedMovie'>
+                    <div class="movie" (click)='selectMovie(movie)' *ngIf='movie.poster_path != null'>
+                        <img src="{{imageBase}}{{size}}{{movie.poster_path}}" alt="{{movie.title}} poster">
+                        <!-- <h3>{{movie.title}}</h3> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>

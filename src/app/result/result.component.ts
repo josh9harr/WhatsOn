@@ -36,7 +36,6 @@ export class ResultComponent implements OnInit {
   }
 
   search(title){
-
     this.movieDBService.search(title).subscribe(data => {
       this.movie = data,
       this.list = this.movie.results
@@ -46,7 +45,7 @@ export class ResultComponent implements OnInit {
   }
 
   selectMedia(media) {
-    window.location.replace(`/display/${media.media_type}/${media.id}`);[]
+    window.location.replace(`/display/${media.media_type}/${media.id}`);
     
     // this.apiService.getMovieFromMovieDB(media.media_type,media.id).subscribe(stuff => {
     //   this.results = stuff

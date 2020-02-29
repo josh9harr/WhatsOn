@@ -67,10 +67,16 @@ export class ApiService {
     return data
   }
   getEpisodeBySeason(showId, season){
-    console.log(showId)
-    console.log(season)
     let data = this.http.get(
-      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=50&season=${season}&reverse_ordering=true`
+      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=12&season=${season}&reverse_ordering=true`
+    )
+    return data
+  }
+
+  getMoreEpisodes(showId, season, page){
+    let num = page*12;
+    let data = this.http.get(
+      `${this.start}shows/${showId}/episodes${this.key}&include_links=true&limit=12&season=${season}&reverse_ordering=true&offset=${num}`
     )
     return data
   }

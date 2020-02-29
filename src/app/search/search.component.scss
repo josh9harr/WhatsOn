@@ -1,37 +1,9 @@
-
-$titleFont: 'Righteous', cursive;
-$otherFont: 'Kanit', sans-serif;
-
-$white:#F2F6F9;
-$orange: #F98A05;
-// $blue: #383d46;
-$black: #151517;
-$gray: #8B8682;
-
-
-@mixin navButtons{
-    cursor: pointer;
-    font-size: 16px;
-    font-family: $titleFont;
-    border-radius: 25px;
-    padding: 10px;
-    background-color: $black;
-    color: $orange;   
-    border: $orange solid 2px;
-    &:hover {
-        background-color: $orange;
-        color: $black;
-        border: $black solid 2px;
-    }
-}
+@import '../../styles.scss';
 
 #searchBar{
     margin: 1%;
-    border-radius: 25px;
     width: 30%;
-    height: 30px;
     font-size: 18px;
-    padding: 10px;
 }
 
 #searchBtn{

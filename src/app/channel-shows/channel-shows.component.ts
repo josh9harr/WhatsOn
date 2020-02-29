@@ -49,7 +49,7 @@ export class ChannelShowsComponent implements OnInit {
 
 
   clicked(id){
-    window.location.replace(`display/shows/${id}`)
+    window.location.replace(`display/tv/${id}`)
   }
 
 }

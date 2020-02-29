@@ -37,8 +37,11 @@ export class DisplayComponent implements OnInit {
   imageBase = 'https://image.tmdb.org/t/p/';
   size = 'original';
   image;
-  seasonNum = 1;
+  seasonNum = 0;
+  counter = 1;
+  more;
   se;
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -47,7 +50,7 @@ export class DisplayComponent implements OnInit {
     private sanitizer: DomSanitizer,
     ) { 
       this.se = new FormGroup({
-        seasonNum: new FormControl(1)
+        seasonNum: new FormControl(0)
       });
     }
     
@@ -79,19 +82,10 @@ export class DisplayComponent implements OnInit {
             console.log(this.media)
           })
 
-          // this.episodes = this.getEpisodeBySeason(this.results.id,this.seasonNum);
-          // console.log(this.episodes)
         }
   
       });
 
-        //if(this.media.subscription_web_sources.length() !=0){
-
-          // this.safeLink = this.sanitizer.sanitize(SecurityContext.URL,this.media.subscription_web_sources[0].link),
-          // console.log(this.safeLink),
-          // // bypassSecurityTrustResourceUrl(this.media.subscription_web_sources[0].link),
-          // console.log(this.media)
-        //}
     };
 
     getCast(type,id){
@@ -101,7 +95,7 @@ export class DisplayComponent implements OnInit {
     }
 
     getEpisodesBySeason(){
-
+      document.getElementById('more').style.display = 'display';
       this.apiService.getMovieFromMovieDB(this.type,this.id).subscribe(data => {
         this.results = data;
 
@@ -116,32 +110,30 @@ export class DisplayComponent implements OnInit {
 
     }
 
-    // getAllEpisodes(id){
-    //   this.apiService.getAllEpisodes(this.id).subscribe(data => {
-    //     this.episodeData = data;
-    //     this.episodes = this.episodeData.results;
-    //     // console.log(this.episodeData)
-    //     // console.log(this.episodes)
-    //   })
-    // }
-    
-    // getEpisodes(id, season){
-    //   this.apiService.displayEpisodeBySeason(this.id,season).subscribe(data => {
-    //     this.episodeData = data,
-    //     this.episodes = this.episodeData.results,
-    //     this.newLink = this.episodes[0].subscription_web_sources[0].link;
-    //     console.log(this.episodeData)
-    //     console.log(this.episodes)
-    //     console.log(this.newLink),
-    //     this.safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.newLink),
-    //     //this.sanitizer.sanitize(SecurityContext.URL,this.episodes[0].subscription_web_sources[0].link),
-    //     console.log(this.safeLink),
-    //     console.log(this.media)
-    //   })
-    // };
+    getMoreEpisodes() {
+      console.log('MOre coming right up')
+      this.apiService.getMovieFromMovieDB(this.type,this.id).subscribe(data => {
+        this.results = data;
+        
+        this.apiService.getMoreEpisodes(this.results.id,this.seasonNum,this.counter).subscribe(data => {
+          this.more = data;
+          this.more = this.more.results;
+          console.log(this.more)
+          this.more.forEach(element => {
+            this.episodes.push(element)
+          });
+
+          if(this.more.length != 12){
+            document.getElementById('more').style.display = 'none';
+          }
+
+        })
+      });
+      this.counter +=1;
+    }
 
     displayLink(link){
-      window.open(link);
+       window.open(link);
     }
   
     setImage(url){

@@ -1,1 +1,37 @@
-<p>shows works!</p>
+
+<div class="page">
+
+    <div class="outer" id="popular">
+        <h2>Popular Shows</h2>
+        <div class="inner">
+            <div *ngFor='let show of popular' class="column" [class.selected]='show === selectedShow'>
+                <div class="show" (click)='selectShow(show)' *ngIf='show.poster_path != null'>
+                    <img src="{{imageBase}}{{size}}{{show.poster_path}}" alt="{{show.name}} poster">
+                    <!-- <h3>
+                        {{show.name}}
+                    </h3> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor='let data of list; let i = index'>
+<div class="outer">
+        <h2>
+            {{names[i]}} 
+        </h2>
+        <p>See More ></p>
+    <div class="inner">
+        <div *ngFor='let shows of data' class="column" [class.selected]='shows === selectedShow'>
+            <div class="show" (click)='selectShow(shows)' *ngIf='shows.poster_path != null'>
+                <img src="{{imageBase}}{{size}}{{shows.poster_path}}" alt="{{shows.name}} poster">
+                <!-- <h3>
+                    {{shows.name}}
+                </h3> -->
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+</div>

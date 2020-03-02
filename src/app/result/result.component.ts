@@ -46,17 +46,11 @@ export class ResultComponent implements OnInit {
 
   selectMedia(media) {
     window.location.replace(`/display/${media.media_type}/${media.id}`);
-    
-    // this.apiService.getMovieFromMovieDB(media.media_type,media.id).subscribe(stuff => {
-    //   this.results = stuff
-
-    // });
   }
 
 
   addToList(media){
-    this.fireAuth.auth.onAuthStateChanged((user) => {
-      console.log(media)
+    this.fireAuth.auth.onAuthStateChanged(user => {
       if(user){
         this.crudService.addToList(user,media,'Favorites');
       }

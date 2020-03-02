@@ -1,0 +1,155 @@
+@import '../../styles.scss';
+
+th{
+    text-align: left;
+     padding: 1% 0%;
+}
+
+td{
+    text-align: right;
+     padding: 1% 0%;
+}
+
+table{
+    width: 90%;
+    margin: 1% 5%;
+    padding: 2% 0%;
+    border-top: $gray 1px solid;
+    text-align: center;
+}
+
+.profile{
+    margin: 3% 30%;
+    width: 40%;
+}
+.media{
+    margin: 1px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    img{
+        height: 250px;
+    }
+}
+
+.outer{
+    width: 95%;
+}
+
+.inner{
+    padding: 2.25% 0%;
+}
+
+#list{
+    padding: 0% 10%;
+
+    .outer{
+        border-top: $gray 1px solid;
+    }
+}
+
+.media{
+    margin: 5px;
+}
+
+#myList{
+    margin-bottom: 0px;
+}
+
+#all{
+    text-decoration: none;
+    color: $gray;
+    margin: 30px 0px 0px 10px;
+    &:hover{
+        text-decoration: underline;
+    }
+    &visted {
+        color: $gray
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $gray; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $orange; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    // background: #b30000; 
+    width: 20px
+  }
+
+  button{
+      font-size: 14px;
+      border-color: $gray;
+    display :inline-block;
+    padding: 0.7em 1.4em;
+    margin: 3% 10%;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family: $otherFont;
+    color: $black;
+    background-color: $orange;
+    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align:center;
+    position:relative;
+    :active{
+     top:0.1em;
+    }
+  }
+
+  #btns{
+      text-align: center;
+  }
+
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

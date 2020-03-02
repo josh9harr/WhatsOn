@@ -5,6 +5,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Users } from '../../assets/Users.model';
 import * as firebase from "firebase/app";
 import { AngularFirestore } from '@angular/fire/firestore';
+import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 
 
 
@@ -16,13 +17,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class ProfileComponent implements OnInit {
   users;
-  SignedIn;
+  SignedIn = false;
   uid: string;
   current;
+  google = false;
   edit = false;
+  facebook=false;
+  linkedG;
+  linkedF;
   email;
-  google=false;
-  facebook =false;
+  imageBase = 'https://image.tmdb.org/t/p/';
+  size = 'original';
+  myList;
   facebookProvider = new firebase.auth.FacebookAuthProvider();
   googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -32,32 +38,49 @@ export class ProfileComponent implements OnInit {
     private fireAuth: AngularFireAuth,
     private firestore: AngularFirestore,
 
-  ) { }
+  ) {}
 
    ngOnInit() {
-     console.log(firebase.auth().currentUser)
      this.fireAuth.auth.onAuthStateChanged((user) => {
-       console.log(user)
-      if(user) {
-        this.SignedIn =true;
-        this.current = user;
+       
+       if(user != null) {
+         this.SignedIn =true;
+         this.current = user;
+         
+         this.CRUD.getUser(user.uid).subscribe(data => {
+           const info = data.data();
+           let userData = new Users;
+           userData.fname = info.fname;
+           userData.lname = info.lname;
+           userData.displayName = info.displayName;
+           userData.email = info.email;
+           userData.password = info.password;
+           this.current = userData;
+          })
+          this.getList();
+          this.getUserData();
+        }else{
+          this.SignedIn = false;
+        }
+      })
+  }
 
-        document.getElementById('name').innerText = user.displayName;
-        document.getElementById('email').innerText = user.email;
+  getUserData(){
+    let user = firebase.auth().currentUser;
 
-        this.CRUD.getUser(user.uid).subscribe(data => {
-          const info = data.data();
-          let userData = new Users;
-          userData.fname = info.fname;
-          userData.lname = info.lname;
-          userData.email = info.email;
-          userData.password = info.password;
-          this.current = userData;
-        })
-      }else{
-        this.SignedIn = false;
-      }
-    })
+    if (user != null) {
+      this.linkedG = false;
+      this.linkedF = false;
+      user.providerData.forEach(profile => {
+        console.log(profile);
+        if(profile.providerId == "google.com"){
+          this.linkedG=true;
+        }
+        if(profile.providerId == "facebook"){
+          this.linkedF=true;
+        }
+      });
+    }
   }
 
   signout(){
@@ -68,21 +91,27 @@ export class ProfileComponent implements OnInit {
   editUser(){
     this.edit = true;
     this.CRUD.signOut()
+    let modal = document.getElementById('myModal');
+    modal.style.display = "block";
+
   }
 
-  saveEdit(fname, lname){
+  saveEdit(name, email, password){
     let user = firebase.auth().currentUser;
     console.log(user);
 
     user.updateProfile({
-      displayName: `${fname} ${lname}`
+      displayName: name
     }).then(() => {
       console.log('updated profile')
     }).catch(error => {
       console.log(error)
     })
 
-    let newData = {fname: fname, lname: lname}
+    this.changeEmail(email);
+    this.changePassword(password);
+
+    let newData = {displayName: name}
 
     this.firestore.doc(`users/${user.uid}`).update(newData)
 
@@ -113,25 +142,56 @@ export class ProfileComponent implements OnInit {
   }
 
   linkGoogle(){
-    console.log('Linking Google')
     firebase.auth().currentUser.linkWithPopup(this.googleProvider).then(result => {
       this.google = true
-      console.log(result.credential)
-      console.log(result.user)
-      
+      window.location.reload();
     }).catch(err => {
       console.log(err)
     })
   }
 
+  unlink(provider){
+    let user = firebase.auth().currentUser;
+
+    if (user != null) {
+      user.providerData.forEach(profile => {
+        if(profile.providerId == provider){
+          user.unlink(profile.providerId).then(() => {
+            alert("You have unlinked your account from " + provider);
+            window.location.reload();
+          }).catch(error => {
+            console.log(error)
+          });
+        }
+      });
+    }
+  }
+
   linkFacebook(){
-    console.log('Linking facebook')
     firebase.auth().currentUser.linkWithPopup(this.facebookProvider).then(result => {
       this.facebook=true
-      console.log(result.credential)
-      console.log(result.user)
+      window.location.reload();
     }).catch(err => {
       console.log(err)
     })
   }
+
+  selectMedia(media){
+    window.location.replace(`/display/${media.type}/${media.id}`);    
+  }
+
+  getList(){
+    let current = firebase.auth().currentUser
+    this.CRUD.readList(current.uid, 'Favorites').subscribe(data => {
+      this.myList = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        }
+      })
+      // this.myList = this.myList.reverse();
+      console.log(this.myList)
+    })
+  }
+
 }

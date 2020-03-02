@@ -1,35 +1,98 @@
 <div class="page">
 
     
-    <div id="profile" *ngIf='edit==false'>
+    <section class="profile" *ngIf='edit==false && SignedIn == true'>
+    <h1 id="account">Account</h1>
         
-        <h1>Profile Page</h1>
-        
-        <!-- <h1>{{user.displayName}}</h1>
-            <h1>{{user.email}}</h1> -->
-            <h1 id="name">{{current.displayName}}</h1>
-            <h3 id='email'>{{current.email}}</h3>
-            <button (click)='editUser()'>Edit</button>
-        </div>
-        
-        <div id="link">
-            <button *ngIf='google==false' (click)="linkGoogle()">Link Google</button>
-            <button *ngIf='facebook==false' (click)="linkFacebook()">Link Facebook</button>
-        </div>
-        
-        <div id="edit" *ngIf="edit">
-            <app-signin></app-signin>
-            <input [(ngModel)]="fname" type="text" placeholder="First Name" value={{current.fname}}>
-            <input [(ngModel)]="lname" type="text" placeholder="Last Name" value="{{current.lname}}">
-            <!-- <input type="text" placeholder="Email" value="{{current.email}}">
-                <input type="text" placeholder="Password" value="{{current.password}}"> -->
-    <button id="saveEdit" (click)='saveEdit(fname, lname)'>Save</button>
-    <input [(ngModel)]='email' placeholder="Email" type="text" value={{current.email}}>
-    <button (click)='changeEmail(email)'>Change Email</button>
-    <input [(ngModel)]='password' placeholder="Password" type="text" value={{current.password}}>
+    <table>
+        <tr>
+            <th>Name: </th>
+            <td id="name">{{current.displayName}}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td id='email'>{{current.email}}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>********</td>
+        </tr>
+        <tr>
+            <th>Google</th>
+            <td *ngIf='linkedG==true'>Linked!</td>
+            <td *ngIf='linkedG==false'>Not Linked</td>
+            <button *ngIf='linkedG==true' (click)="unlink('google.com')">Unlink</button>
+            <button *ngIf='linkedG==false' (click)="linkGoogle()">Link</button>
+        </tr>
+        <tr>
+            <th>Facebook</th>
+            <td *ngIf='linkedF==true'>Linked!</td>
+            <td *ngIf='linkedF==false'>Not Linked</td>
+            <button *ngIf='linkedF==true' (click)="unlink('facebook')">Unlink</button>
+            <button *ngIf='linkedF==false' (click)="linkFacebook()">Link</button>
+        </tr>
+    </table>
+    <div id="btns">
+        <button (click)='editUser()'>Edit Profile</button>
+        <button (click)='signout()'>Sign Out</button>
+    </div>
+    </section>
     
-    <button (click)='changePassword(password)'>Change Password</button>
-</div>
+    <section id="list" *ngIf='SignedIn == true'>
+            <div class="row">
+                <h1 id="myList">My List</h1>
+                <a id="all" href="/list">See all ></a>
+            </div>
+            
+            <div class="outer">
+                <div class="inner">
+                    <h2 *ngIf='myList.length == 0'>Add some movies or shows to your favorites to see them here</h2>
+                    <div *ngFor='let media of myList' class="column" [class.selection]='media === SelectedMedia'>
+                        <div class="media" (click)='selectMedia(media)'>
+                            <img src="{{imageBase}}{{size}}{{media.poster}}" alt="{{media.title}} poster">
+                            <h3>{{media.title}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- <div *ngIf='SignedIn == false'>
+            <h2 >You need to sign up or login to have account information</h2>
+            <a href="/signin">Log In</a>
+        </div> -->
 
-<button (click)='signout()'>Sign Out</button>
+        <section id="edit" *ngIf="edit">
+            <div class="profile">
+
+                <div class="modal" id="myModal">
+                    <div class="model-content">
+                        <span class="close">$times</span>
+                        <app-signin></app-signin>
+                    </div>
+                </div>
+                
+                <h1 id="EditProfile">Edit Profile</h1>
+                <div *ngIf='SignedIn == false'>
+                    <h2 >You need to sign up or login to have account information</h2>
+                    <a href="/signin">Log In</a>
+                            </div>
+                            <table *ngIf='SignedIn == true'>
+                                <tr>
+                                    <th>Name: </th>
+                                    <input [(ngModel)]="name" type="text" placeholder="{{current.fname}} {{current.lname}}" value='{{current.fname}} {{current.lname}}'>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                        <input [(ngModel)]='email' placeholder="{{current.email}}" type="text" value={{current.email}}>
+                                    </tr>
+                                    <tr>
+                                        <th>Password</th>
+                                        <input [(ngModel)]='password' placeholder="{{current.password}}" type="text" value={{current.password}}>
+                                    </tr>
+                                </table>
+                                <button id="saveEdit" (click)='saveEdit(name, email, password)'>Save</button>
+                            </div>
+        </section>
+
 </div>

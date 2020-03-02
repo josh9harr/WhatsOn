@@ -30,7 +30,7 @@ $WhatsOn-theme: mat-light-theme($WhatsOn-primary, $WhatsOn-accent, $WhatsOn-warn
 
 // Fonts (titles, everthing else)
 $titleFont: 'Oswald', sans-serif;
-$otherFont: 'Noto Sans JP', sans-serif;
+$otherFont: Roboto, "Helvetica Neue", sans-serif;
 
 // font-family: 'Muli', sans-serif;
 // font-family: 'Noto Sans JP', sans-serif;
@@ -51,7 +51,7 @@ $gray: #d9d9d9;
 
 @mixin navButtons{
     cursor: pointer;
-    font-size: 14px;
+    // font-size: 14px;
     font-family: $titleFont;
     border-radius: 5px;
     // padding: 10px;
@@ -95,8 +95,8 @@ nav{
     flex-direction: row;
     flex-wrap: nowrap;
     font-family: $titleFont;
-    font-size: 14px;
-    padding: 10px;
+    font-size: 16px;
+    padding: 5px;
     align-items: center;
     #appName{
         font-size: 22px;
@@ -117,7 +117,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 ////////////////////////////////////////////////// CLASSES /////////////////////////////////////////////
 
-
+.all{
+    text-decoration: none;
+    color: $gray;
+    margin: 10px 0px 0px 10px;
+    &:hover{
+        text-decoration: underline;
+    }
+    &visted {
+        color: $gray
+    }
+}
 
 .inner{
     width: 100%;

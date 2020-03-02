@@ -7,6 +7,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 //Model for the database
 import { Users } from '../assets/Users.model'
 import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
+import { movieGenres } from 'src/assets/genre';
 
 
 
@@ -16,6 +17,8 @@ import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
 export class CRUDService {
   userData;
   db = firebase.firestore()
+  tv = {}
+  movie = {}
   constructor(
     private firestore: AngularFirestore,
     private auth: AngularFireAuth,
@@ -36,31 +39,24 @@ export class CRUDService {
   }
 
   addToList(user, media, list){
-    if(media.imdb){
-      media = {
+    if(media.media_type == 'tv'){
+      this.tv = {
         id: media.id, 
-        imdb: media.imdb,
-        themoviedb: media.themoviedb,
-        title: media.title,
-        poster: media.poster_120x171,
+        title: media.name,
+        type: media.media_type,
+        poster: media.poster_path,
       }
-    }else{
-      media = {
+      return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.name).set(this.tv);
+    }else if(media.media_type == 'movie'){
+      this.movie = {
         id: media.id, 
-        imdb: media.imdb_id,
-        tvdb: media.tvdb,
-        themoviedb: media.themoviedb,
         title: media.title,
-        poster: media.artwork_304x171,
+        type: media.media_type,
+        poster: media.poster_path,
       }
+      return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.title).set(this.movie);
     }
-    return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.title).set(media);
   }
-
-  // //Creates a user for the database
-  // createUser(user: Users) {
-  //   return this.firestore.collection('users').add(user)
-  // }
 
   //updates user information
   updateUser(user: Users){
@@ -72,19 +68,6 @@ export class CRUDService {
     this.firestore.doc('users/'+ userId).delete();
   }
 
-  // addUser(){
-  //   const user = firebase.auth().currentUser;
-  //     if(user!=null) {
-  //       let userData = {
-  //         displayName: user.displayName,
-  //         email: user.email,
-  //       }
-  //       let data = JSON.parse(JSON.stringify(userData));
-  //       this.firestore.collection('users').doc(user.uid).set(data);
-  //       // this.firestore.collection('users').doc(user.uid);
-  //       this.firestore.collection('users').doc(user.uid).collection('SignIns').doc('facebook').set(user);
-  //     }
-  // }
 
 
   async signUp(email: string, password: string, userData) {

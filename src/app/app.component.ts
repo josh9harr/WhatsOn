@@ -15,13 +15,11 @@ export class AppComponent {
 
   constructor(private CRUDService: CRUDService, private fireAuth: AngularFireAuth) {
     let user = this.fireAuth.auth.currentUser;
-    console.log(user);
       if (user != null) {
         this.Signedin = true;
       }else{
         this.Signedin = false;
       }
-      console.log('hello')
     
   }
 

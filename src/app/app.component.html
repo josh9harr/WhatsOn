@@ -1,30 +1,18 @@
-  <div class="container">
+  <section class="container">
     <nav>
-      <!-- <div id="Home"> -->
+      <div id="left" >
         <a id="appName" href="/home">What's On?</a>
-        <!-- </div> -->
-            <!-- <div id="shows"> -->
-              <a href="/shows">Tv Shows</a>
-              <!-- </div> -->
-              <!-- <div id="movies"> -->
-                <a href="/movies">Movies</a>
-                <!-- </div> -->
-                <a href="/channels">Channels</a>
-                <app-search id="searchBox"></app-search>
-                <a href='/lists'>My Lists</a>
-                <div id="lisu" *ngIf='Signedin'>
-                  <!-- <div id="login"> -->
-                    <!-- <a href="/signin">Sign In</a> -->
-                    <!-- </div> -->
-                    <!-- <div id="signup"> -->
-                      <a href="/signup">Sign Up</a>
-                    </div>
-                    <!-- </div> -->
-                    <div id="profile" *ngIf='!Signedin'>
-                      <a href="/profile">Profile</a>
-                    </div>
-                  </nav>
-                </div>
+        <a href="/shows">Tv Shows</a>
+        <a href="/movies">Movies</a>
+        <a href="/channels">Channels</a>
+      </div>
+      <div id="right" >
+        <app-search id="searchBox"></app-search>
+        <a href='/list'>My Lists</a>
+        <a href="/profile">Profile</a>
+      </div>
+    </nav>
+  </section>
                 <router-outlet></router-outlet>
                 <footer>
                   <p>This application was made by Joshua Harrington<br>A student of Neumont College of Computer Science</p>

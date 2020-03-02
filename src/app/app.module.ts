@@ -28,6 +28,7 @@ import { compileBaseDefFromMetadata } from '@angular/compiler';
 import { MoviesComponent } from './movies/movies.component';
 import { ShowsComponent } from './shows/shows.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ListComponent } from './list/list.component';
 
 
 
@@ -45,6 +46,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ChannelShowsComponent,
     MoviesComponent,
     ShowsComponent,
+    ListComponent,
   ],
   imports: [
     HttpClientModule,
@@ -61,6 +63,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule.forRoot([
       {path: '', redirectTo: "/home", pathMatch: 'full'},
       {path: 'home', component: HomeComponent},
+      {path: 'list', component: ListComponent},
       {path: 'shows', component: ShowsComponent},
       {path: 'movies', component: MoviesComponent},
       {path: 'display/:type/:id', component: DisplayComponent},

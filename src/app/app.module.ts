@@ -69,7 +69,7 @@ import { ListComponent } from './list/list.component';
       {path: 'display/:type/:id', component: DisplayComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'signup', component: SignupComponent},
-      {path: 'signin', component: SigninComponent},
+      // {path: 'signin', component: SigninComponent},
       {path: 'results/:title', component: ResultComponent},
       {path: 'channels', component: ChannelsComponent},
       {path: 'channels/:name', component: ChannelShowsComponent}

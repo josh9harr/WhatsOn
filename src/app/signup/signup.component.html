@@ -3,15 +3,15 @@
 
     <h1>Sign Up Page</h1>
     
-    <div id="signUp">
+    <div id="signUp" class="column">
         <input type="text" placeholder="First" [(ngModel)] ="fname">
         <input type="text" placeholder="Last" [(ngModel)] ="lname">
         <input type="text" placeholder="Email Address" [(ngModel)] ="email">
         <input type="text" placeholder="Password" [(ngModel)] ="password">
         <button (click)='createUser(fname,lname,email,password)'>Sign Up</button>
     </div>
-    <div id="otherSignIn">
-        <button id="googleBtn" (click)='googleSignUp()'>Google Sign In</button>
-        <button id="facebookBtn" (click)='facebookSignUp()'>facebook Sign In</button>
+
+    <div id="signin">
+        <app-signin></app-signin>
     </div>
 </div>

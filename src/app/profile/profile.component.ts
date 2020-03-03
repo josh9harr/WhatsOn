@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
         if(profile.providerId == "google.com"){
           this.linkedG=true;
         }
-        if(profile.providerId == "facebook"){
+        if(profile.providerId == "facebook.com"){
           this.linkedF=true;
         }
       });
@@ -90,9 +90,10 @@ export class ProfileComponent implements OnInit {
 
   editUser(){
     this.edit = true;
+    var pop = document.getElementsByClassName('modal')[0]
+    //.getElementById('myModal');
+    pop[0].style.display = 'block';
     this.CRUD.signOut()
-    let modal = document.getElementById('myModal');
-    modal.style.display = "block";
 
   }
 
@@ -157,7 +158,7 @@ export class ProfileComponent implements OnInit {
       user.providerData.forEach(profile => {
         if(profile.providerId == provider){
           user.unlink(profile.providerId).then(() => {
-            alert("You have unlinked your account from " + provider);
+            // alert("You have unlinked your account from " + provider);
             window.location.reload();
           }).catch(error => {
             console.log(error)

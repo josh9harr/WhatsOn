@@ -1,12 +1,9 @@
-#page{
-    display: flex;
-    flex-direction: column;
-}
+
 
 #signIn{
     display: flex;
     flex-direction: column;
-    width: 30%;
+    // width: 60%;
     input {
         margin: 5px;
     }
@@ -15,6 +12,30 @@
 #other{
     display: flex;
     flex-direction: column;
-    width: 30%;
+    // width: 60%;
+    // margin: 0% 20%;
+}
 
+#googleBtn{
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px 0px 0px;
+    padding: 6px 12px;
+    background-color: #dd4b39;
+    color: #fff;
+    border: black 1px solid;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+#facebookBtn{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin: 5px 0px 0px;
+    padding: 6px 12px;
+    color: #fff;
+    background-color: #3b5998;
+    border: black 1px solid;;
+    border-radius: 5px;
+    font-weight: 500;
 }

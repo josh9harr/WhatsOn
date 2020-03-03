@@ -1,0 +1,21 @@
+@import '../../styles.scss';
+
+#signin{
+    border-top: $gray 1px solid;
+    width: 40%;
+    margin: 1% 30%;
+}
+
+#signUp{
+    width: 40%;
+    margin: 1% 30%;
+    input{
+        margin: 5px;
+    }
+}
+
+.page{
+    width: 60%;
+    background-color: $white;
+    margin: 3% 20%;
+}

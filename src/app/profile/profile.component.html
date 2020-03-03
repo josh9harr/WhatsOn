@@ -28,17 +28,17 @@
             <th>Facebook</th>
             <td *ngIf='linkedF==true'>Linked!</td>
             <td *ngIf='linkedF==false'>Not Linked</td>
-            <button *ngIf='linkedF==true' (click)="unlink('facebook')">Unlink</button>
+            <button *ngIf='linkedF==true' (click)="unlink('facebook.com')">Unlink</button>
             <button *ngIf='linkedF==false' (click)="linkFacebook()">Link</button>
         </tr>
     </table>
     <div id="btns">
-        <button (click)='editUser()'>Edit Profile</button>
+        <!-- <button (click)='editUser()'>Edit Profile</button> -->
         <button (click)='signout()'>Sign Out</button>
     </div>
     </section>
     
-    <section id="list" *ngIf='SignedIn == true'>
+    <section id="list" *ngIf='SignedIn == true && edit == false'>
             <div class="row">
                 <h1 id="myList">My List</h1>
                 <a id="all" href="/list">See all ></a>
@@ -66,33 +66,33 @@
             <div class="profile">
 
                 <div class="modal" id="myModal">
-                    <div class="model-content">
+                    <div class="modal-content">
                         <span class="close">$times</span>
                         <app-signin></app-signin>
                     </div>
                 </div>
                 
                 <h1 id="EditProfile">Edit Profile</h1>
-                <div *ngIf='SignedIn == false'>
-                    <h2 >You need to sign up or login to have account information</h2>
-                    <a href="/signin">Log In</a>
-                            </div>
-                            <table *ngIf='SignedIn == true'>
-                                <tr>
-                                    <th>Name: </th>
-                                    <input [(ngModel)]="name" type="text" placeholder="{{current.fname}} {{current.lname}}" value='{{current.fname}} {{current.lname}}'>
-                                </tr>
-                                <tr>
-                                    <th>Email:</th>
-                                        <input [(ngModel)]='email' placeholder="{{current.email}}" type="text" value={{current.email}}>
-                                    </tr>
-                                    <tr>
-                                        <th>Password</th>
-                                        <input [(ngModel)]='password' placeholder="{{current.password}}" type="text" value={{current.password}}>
-                                    </tr>
-                                </table>
-                                <button id="saveEdit" (click)='saveEdit(name, email, password)'>Save</button>
-                            </div>
+                <!-- <div *ngIf='SignedIn == false'> -->
+                    <!-- <h2 >You need to sign up or login to have account information</h2> -->
+                    <!-- <a href="/signin">Log In</a> -->
+                <!-- </div> -->
+                <table *ngIf='SignedIn == true'>
+                    <tr>
+                        <th>Name: </th>
+                        <input [(ngModel)]="name" type="text" placeholder="{{current.fname}} {{current.lname}}" value='{{current.fname}} {{current.lname}}'>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                            <input [(ngModel)]='email' placeholder="{{current.email}}" type="text" value={{current.email}}>
+                        </tr>
+                        <tr>
+                            <th>Password</th>
+                            <input [(ngModel)]='password' placeholder="{{current.password}}" type="text" value={{current.password}}>
+                        </tr>
+                    </table>
+                    <button id="saveEdit" (click)='saveEdit(name, email, password)'>Save</button>
+                </div>
         </section>
 
 </div>

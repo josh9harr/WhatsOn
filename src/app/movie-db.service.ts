@@ -98,4 +98,11 @@ export class MovieDBService {
     return data;
   }
 
+  getRelatedShow(id){
+    let data = this.http.get(
+      `https://api.themoviedb.org/3/tv/${id}/similar?api_key=4233fc015e489c82cdd57b991d85d07b&language=en-US&page=1`
+    )
+    return data;
+  }
+
 }

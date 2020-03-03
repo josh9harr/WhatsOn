@@ -41,6 +41,7 @@ export class DisplayComponent implements OnInit {
   counter = 1;
   more;
   se;
+  related;
 
   constructor(
     private apiService: ApiService,
@@ -81,7 +82,7 @@ export class DisplayComponent implements OnInit {
             this.media = data,
             console.log(this.media)
           })
-
+          this.getRelatedShow();
         }
   
       });
@@ -141,6 +142,14 @@ export class DisplayComponent implements OnInit {
       document.getElementById('test').style.backgroundRepeat = `no-repeat`;
       document.getElementById('test').style.backgroundSize = `cover`;
 
+    }
+
+    getRelatedShow(){
+      this.movieDB.getRelatedShow(this.id).subscribe(data => {
+        this.related = data;
+        this.related = this.related.results;
+        console.log(this.related)
+      })
     }
     
     

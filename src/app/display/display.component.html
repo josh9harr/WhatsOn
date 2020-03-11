@@ -35,9 +35,9 @@
             </div>
 
             <div id="movieLinks" *ngIf='this.type == "movie"' class="t-black">
-                <div id="free" *ngIf='media.free_web_sources.length != 0'>
+                <div id="free" class="row" *ngIf='media.free_web_sources.length != 0'>
                         <b>Free Links</b>
-                    <div id="freeLinks" class="row" *ngFor='let link of media.free_web_sources'>
+                    <div id="freeLinks" *ngFor='let link of media.free_web_sources'>
                         <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
                     </div>
                 </div>
@@ -132,7 +132,8 @@
             </div>
             <div class="tabcontent" id="Related">
                 <div class="row outer">
-                    <h2>Related Shows</h2>
+                    <h2 *ngIf='type == "tv"'>Related Shows</h2>
+                    <h2 *ngIf='type == "movie"'>Related Movies</h2>
                     <div class="inner">
                         <div class="related" *ngFor='let media of related'  [class.selected]='media === selectedMovie'>
                             <div class="similar" (click)='selectMovie(media)' *ngIf='media.poster_path != null'>

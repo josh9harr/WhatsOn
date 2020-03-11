@@ -232,7 +232,9 @@ export class DisplayComponent implements OnInit {
     }
 
 
-
+    selectMovie(movie){
+      window.location.replace(`/display/${this.type}/${movie.id}`);
+    }
 
 
   }

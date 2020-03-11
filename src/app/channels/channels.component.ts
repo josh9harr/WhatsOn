@@ -32,7 +32,9 @@ export class ChannelsComponent implements OnInit {
     this.apiService.getChannels().subscribe(data => {
       this.other = data;
       this.channelList = this.other.results
-      console.log(this.channelList)
+      // console.log(this.channelList)
+      document.getElementById('more').style.display = 'block';
+
     })
   }
 
@@ -43,6 +45,9 @@ export class ChannelsComponent implements OnInit {
       this.other.forEach(element => {
         this.channelList.push(element)
       });
+      if(this.other.length != 24){
+        document.getElementById('more').style.display = 'none';
+      }
     })
     this.counter += 1;
   }

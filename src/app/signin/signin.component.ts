@@ -12,7 +12,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
-
+  SignedIn;
   constructor(
     private router: Router,
     private CRUD: CRUDService,
@@ -23,7 +23,7 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if(user){
-        window.location.replace('/home')
+        this.SignedIn==true
       }
     });
   }

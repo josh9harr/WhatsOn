@@ -1,12 +1,18 @@
 
 <div class="page">
 
-    <h1>Sign Up Page</h1>
+    <h1>Sign Up or Log In</h1>
     
     <div id="signUp" class="column">
-        <input type="text" placeholder="First" [(ngModel)] ="fname">
-        <input type="text" placeholder="Last" [(ngModel)] ="lname">
+        <!-- <label for="fname">First Name</label> -->
+        <input type="text" placeholder="First Name" [(ngModel)] ="fname">
+        <!-- <label for="fname">Last Name</label> -->
+        <input type="text" placeholder="Last Name" [(ngModel)] ="lname">
+        <!-- <label for="fname">Email</label> -->
+
         <input type="text" placeholder="Email Address" [(ngModel)] ="email">
+        <!-- <label for="fname">Password</label> -->
+
         <input type="text" placeholder="Password" [(ngModel)] ="password">
         <button (click)='createUser(fname,lname,email,password)'>Sign Up</button>
     </div>

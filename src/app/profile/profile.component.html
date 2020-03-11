@@ -1,5 +1,8 @@
 <div class="page">
 
+    <section *ngIf='SignedIn == false'>
+        <app-signup id="signup"></app-signup>
+    </section>
     
     <section class="profile" *ngIf='edit==false && SignedIn == true'>
     <h1 id="account">Account</h1>

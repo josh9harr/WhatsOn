@@ -11,7 +11,7 @@ import * as firebase from "firebase/app";
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
+SignedIn;
   constructor(
     private router: Router,
     private CRUD: CRUDService,
@@ -21,7 +21,8 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.fireAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        window.location.replace('/profile')
+        // window.location.replace('/profile')
+        this.SignedIn = true;
       }
     });
   }

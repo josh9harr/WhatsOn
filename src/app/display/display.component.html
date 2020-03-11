@@ -95,22 +95,30 @@
                                         <div id="linkSection">
                                             <div id="free" *ngIf='data.free_web_sources.length != 0'>
                                                 <b>Free Links</b>
-                                                <div class="row" id="freeLinks" *ngFor='let link of data.free_web_sources'>
-                                                    <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                                <div class="row btnRow">
+
+                                                    <div id="freeLinks" *ngFor='let link of data.free_web_sources'>
+                                                        <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             
                                             <div id="purchase" *ngIf='data.purchase_web_sources.length != 0'>
                                             <b>Purchase Links:</b>
-                                            <div class="row" id="purchaseLinks" *ngFor='let link of data.purchase_web_sources'>
-                                                <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                            <div class="row btnRow">
+
+                                                <div id="purchaseLinks" *ngFor='let link of data.purchase_web_sources'>
+                                                    <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                                </div>
                                             </div>
                                         </div>
                                         
                                         <div id='subscription' *ngIf='data.subscription_web_sources.length != 0'>
                                             <b>Subscription Links:</b>
-                                            <div class="row" id="subscriptionLinks" *ngFor='let link of data.subscription_web_sources'>
-                                                <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                            <div class="row btnRow">
+                                                <div class="row" id="subscriptionLinks" *ngFor='let link of data.subscription_web_sources'>
+                                                    <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                                </div>
                                             </div>
                                         </div>
                                         
@@ -119,8 +127,8 @@
                                 </div>
                                 
                             </div>
-                            <button id="more" (click)='getMoreEpisodes()'>Load More</button>
                         </div>
+                        <button id="more" (click)='getMoreEpisodes()'>Load More</button>
             </div>
             <div class="tabcontent" id="Related">
                 <div class="row outer">

@@ -1,12 +1,12 @@
 
 <div class="page">
 
-    <h1>Shows on {{channel}}</h1>
+    <h1 id="showsON">Shows on {{channel}}</h1>
     <ul id="showList">
         <li class="show" *ngFor='let show of shows' (click)='clicked(show.themoviedb)'>
             <img src="{{show.artwork_304x171}}" alt="{{show.title}} artwork">
             <h4 id="name">{{show.title}}</h4>
         </li>
     </ul>
-    <button (click)='getMoreShows()'>Load More</button>
+    <button id="more" (click)='getMoreShows()'>Load More</button>
 </div>

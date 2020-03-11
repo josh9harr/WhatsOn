@@ -110,7 +110,8 @@ export class DisplayComponent implements OnInit {
           this.episodeData = data;
   
           this.episodes = this.episodeData.results
-          console.log(this.episodes)
+          // console.log(this.episodes)
+          document.getElementById('more').style.display = 'block';
           return this.episodes;
         })
       })
@@ -129,14 +130,13 @@ export class DisplayComponent implements OnInit {
           this.more.forEach(element => {
             this.episodes.push(element)
           });
-
           if(this.more.length != 12){
             document.getElementById('more').style.display = 'none';
           }
 
         })
+        this.counter +=1;
       });
-      this.counter +=1;
     }
 
     displayLink(link){
@@ -165,6 +165,8 @@ export class DisplayComponent implements OnInit {
           this.crudService.addToList(user,media, this.type, 'Favorites');
           let added = document.getElementById('added');
           alert(`Added to List`)
+        }else{
+          alert("You need to have an account to save items to your list.")
         }
       }
     )}
@@ -225,9 +227,10 @@ export class DisplayComponent implements OnInit {
       }
 
       document.getElementById(cityName).style.display = "block";
-      document.getElementById(cityName).className += ' active';
+      document.getElementById(cityName).classList.add(' active');
       // evt.currentTarget.className += " active";
     }
+
 
 
 

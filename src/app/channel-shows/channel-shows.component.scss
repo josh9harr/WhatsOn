@@ -21,6 +21,19 @@
     }
 }
 
+#showsON{
+    padding: 3%;
+}
+
+#more {
+    @include navButtons;
+    display: none;
+    padding: 2%;
+    width: 100%;
+    font-size: 2.5em;
+    cursor: pointer;
+}
+
 #name{
     position: absolute;
     bottom: 0;

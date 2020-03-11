@@ -44,3 +44,12 @@ ul{
         font-size: 18px;;
     }
 }
+
+#more {
+    @include navButtons;
+    display: none;
+    padding: 2%;
+    width: 100%;
+    font-size: 2.5em;
+    cursor: pointer;
+}

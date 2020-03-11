@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
 
    ngOnInit() {
      this.fireAuth.auth.onAuthStateChanged((user) => {
+
        
        if(user != null) {
          this.SignedIn =true;
@@ -85,7 +86,9 @@ export class ProfileComponent implements OnInit {
 
   signout(){
     this.CRUD.signOut();
-    window.location.replace('/home');
+    this.SignedIn = false;
+    // window.location.replace('/home');
+    // window.location.reload()
   }
 
   editUser(){

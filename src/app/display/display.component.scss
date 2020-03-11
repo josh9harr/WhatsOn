@@ -21,7 +21,7 @@
 .tabs {
     overflow: hidden;
     border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: lightGray;
   }
 
   .tabs button {
@@ -36,11 +36,11 @@
   }
   
   .tabs button:hover {
-    background-color: #ddd;
+    background-color: $darkGray;
   }
   
   .tabs button.active {
-    background-color: #ccc;
+    background-color: $darkGray;
   }
   
   .tabcontent {
@@ -112,6 +112,7 @@
 
 .episodeDisplay {
     width: 310px;
+    margin: 5px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -139,7 +140,19 @@
         border: $black 1px solid;
         // box-shadow: $gray 0px 0px 10px 0px;
         border-top: 0px;
+        p{
+            overflow-y: hidden;
+            max-height: 195px;
+            text-overflow: ellipsis;
+            /* -webkit-line-clamp: 5; */
+            word-break: break-word;
+        }
     }
+
+}
+
+.btnRow{
+    flex-wrap: wrap;
 
 }
 
@@ -233,6 +246,17 @@
 
 #more, .btn{
     @include navButtons
+}
+
+#more {
+    display: none;
+    padding: 2%;
+    width: 100%;
+    font-size: 2.5em;
+}
+
+.btn{
+    margin: 2px;
 }
 
 .similar{

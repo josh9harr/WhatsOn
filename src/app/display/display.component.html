@@ -12,8 +12,16 @@
                 </div>
                 
                 <div id="text">
-                    <h1 class="name t-black" *ngIf='this.type=="movie"'>{{mdbMedia.title}}</h1>
-                    <h1 class="name t-black" *ngIf='this.type=="tv"'>{{mdbMedia.name}}</h1>
+                    <div class="row">
+                        <h1 class="name t-black" *ngIf='this.type=="movie"'>{{mdbMedia.title}}</h1>
+                        <h1 class="name t-black" *ngIf='this.type=="tv"'>{{mdbMedia.name}}</h1>
+                        <div *ngIf='inFave==false' class="add" (click)='addToList(mdbMedia)'>&#43;</div>
+                        <div *ngIf='inFave==true' class="add" (click)='deleteFromList(mdbMedia)'>&#10005;</div>
+                    </div>
+                    <div *ngFor='let channel of media.channels' class="row">
+                        <img id="channelImg" src="{{channel.artwork_208x117}}" alt="Channel Image" (click)='toChannel(channel.name)'>
+                    </div>
+
                     <div class="t-gray">
                             {{media.rating}} {{media.release_date | date: 'shortDate'}}<br>
                     </div>
@@ -28,39 +36,53 @@
 
             <div id="movieLinks" *ngIf='this.type == "movie"' class="t-black">
                 <div id="free" *ngIf='media.free_web_sources.length != 0'>
-                    <b>Free Links</b>
+                        <b>Free Links</b>
                     <div id="freeLinks" class="row" *ngFor='let link of media.free_web_sources'>
                         <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
                     </div>
                 </div>
+                <div *ngIf='media.free_web_sources.length == 0'>
+                    <h4>No free links at this time</h4>
+                </div>
                 
-                <div id="purchase" class="row" *ngIf='media.purchase_web_sources.length != 0'>
-                    <b>Purchase Links:</b>
+                <div id='subscription' class="row" *ngIf='media.subscription_web_sources.length != 0'>
+                        <b>Subscription Links:</b>
+                    <div id="subscriptionLinks" *ngFor='let link of media.subscription_web_sources'>
+                        <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                    </div>
+                </div>
+                <div *ngIf='media.subscription_web_sources.length == 0'>
+                        <h4>No subscription links at this time</h4>
+                    </div>
+
+                    <div id="purchase" class="row" *ngIf='media.purchase_web_sources.length != 0'>
+                            <b>Purchase Links:</b>
                     <div id="purchaseLinks" *ngFor='let link of media.purchase_web_sources'>
                             <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
                         </div>
                     </div>
-                    
-                    <div id='subscription' class="row" *ngIf='media.subscription_web_sources.length != 0'>
-                        <b>Subscription Links:</b>
-                        <div id="subscriptionLinks" *ngFor='let link of media.subscription_web_sources'>
-                            <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                    <div *ngIf='media.purchase_web_sources.length == 0'>
+                            <h4>No purcahse links at this time</h4>
                         </div>
-                    </div>
             </div>
         </div>
 
     </div>
                 
-                
-    <mat-tab-group>
-            <mat-tab label="Episodes">
-                    <div id="episodeList" class="outer" *ngIf='this.type=="tv"'>
-                            <select [(ngModel)]="seasonNum" (ngModelChange)='getEpisodesBySeason()' id="seasonNum">
-                                <option *ngFor='let season of mdbMedia.seasons' value="{{season.season_number}}">{{season.name}}</option>
-                            </select>
+        
+<div class="tabs">
+    <button *ngIf='this.type == "tv"' class="tablinks" (click)="openTab(event, 'Episodes')">Episodes</button>
+    <button class="tablinks" (click)="openTab(event, 'Related')">Related Content</button>
+    <button class="tablinks" (click)="openTab(event, 'Details')">Details</button>
+</div>
+
+            <div class="tabcontent column" id="Episodes">
+                <select [(ngModel)]="seasonNum" (ngModelChange)='getEpisodesBySeason()' id="seasonNum" aria-placeholder="Season">
+                    <option *ngFor='let season of mdbMedia.seasons' value="{{season.season_number}}">{{season.name}}</option>
+                </select>
+                                <div id="episodeList" class="row" *ngIf='this.type=="tv"'>
             
-                            <h2>Episodes</h2>
+                            <!-- <h2>Episodes</h2> -->
             
                                 <div class="episodeDisplay" *ngFor='let data of episodes'>
                                     <img src="{{data.thumbnail_304x171}}" alt="{{data.title}} Poster"/>
@@ -73,22 +95,22 @@
                                         <div id="linkSection">
                                             <div id="free" *ngIf='data.free_web_sources.length != 0'>
                                                 <b>Free Links</b>
-                                                <div id="freeLinks" *ngFor='let link of data.free_web_sources'>
-                                                    <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                                <div class="row" id="freeLinks" *ngFor='let link of data.free_web_sources'>
+                                                    <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
                                                 </div>
                                             </div>
                                             
                                             <div id="purchase" *ngIf='data.purchase_web_sources.length != 0'>
                                             <b>Purchase Links:</b>
-                                            <div id="purchaseLinks" *ngFor='let link of data.purchase_web_sources'>
-                                                <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                            <div class="row" id="purchaseLinks" *ngFor='let link of data.purchase_web_sources'>
+                                                <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
                                             </div>
                                         </div>
                                         
                                         <div id='subscription' *ngIf='data.subscription_web_sources.length != 0'>
                                             <b>Subscription Links:</b>
-                                            <div id="subscriptionLinks" *ngFor='let link of data.subscription_web_sources'>
-                                                <button (click)='displayLink(link.link)'>{{link.display_name}}</button>
+                                            <div class="row" id="subscriptionLinks" *ngFor='let link of data.subscription_web_sources'>
+                                                <button class="btn" (click)='displayLink(link.link)'>{{link.display_name}}</button>
                                             </div>
                                         </div>
                                         
@@ -96,22 +118,24 @@
                                     
                                 </div>
                                 
-                        </div>
+                            </div>
                             <button id="more" (click)='getMoreEpisodes()'>Load More</button>
                         </div>
-            </mat-tab>
-            <mat-tab label="Related Content">
+            </div>
+            <div class="tabcontent" id="Related">
                 <div class="row outer">
                     <h2>Related Shows</h2>
                     <div class="inner">
-                        <div class="related" *ngFor='let media of related'>
-                            <img src="{{imageBase}}{{size}}{{media.poster_path}}" alt="poster" width="150">
-                            <p>{{media.name}}</p>
+                        <div class="related" *ngFor='let media of related'  [class.selected]='media === selectedMovie'>
+                            <div class="similar" (click)='selectMovie(media)' *ngIf='media.poster_path != null'>
+                                <img src="{{imageBase}}{{size}}{{media.poster_path}}" alt="poster">
+                                <!-- <p>{{media.name}}</p> -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </mat-tab>
-            <mat-tab label="Other Info">
+            </div>
+            <div class="tabcontent" id="Details">
                     <div class="castDisplay outer">
                             <h2>Cast: </h2> 
                             <div class="inner">
@@ -125,8 +149,7 @@
                                 </div>
                             </div>
                         </div>
-            </mat-tab>
-    </mat-tab-group>
+            </div>
 
 
 

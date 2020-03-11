@@ -66,13 +66,13 @@ export class MoviesComponent implements OnInit {
     window.location.replace(`/display/movie/${movie.id}`);
   }
 
-  addToList(show){
-    this.fireAuth.auth.onAuthStateChanged((user) => {
-      console.log(show)
-      if(user){
-        this.crudService.addToList(user,show,'Favorites');
-      }
-    }
-  )}
+  // addToList(media){
+  //   this.fireAuth.auth.onAuthStateChanged(user => {
+  //     if(user){
+  //       this.crudService.addToList(user,media,'Favorites');
+  //       console.log(`Added To list`)
+  //     }
+  //   }
+  // )}
     
 }

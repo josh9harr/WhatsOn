@@ -98,11 +98,26 @@ export class MovieDBService {
     return data;
   }
 
-  getRelatedShow(id){
+  getRelated(type, id){
     let data = this.http.get(
-      `https://api.themoviedb.org/3/tv/${id}/similar?api_key=4233fc015e489c82cdd57b991d85d07b&language=en-US&page=1`
+      `https://api.themoviedb.org/3/${type}/${id}/similar?api_key=4233fc015e489c82cdd57b991d85d07b&language=en-US&page=1`
     )
     return data;
+  }
+
+
+  topRatedShow(){
+    let data = this.http.get(
+      `https://api.themoviedb.org/3/discover/tv?api_key=4233fc015e489c82cdd57b991d85d07b&language=en-US&sort_by=vote_average.desc&page=1&timezone=America%2FNew_York&vote_average.gte=5&vote_count.gte=500&include_null_first_air_dates=false`
+    )
+    return data
+  }
+
+  topRatedMovie(){
+    let data = this.http.get(
+      `https://api.themoviedb.org/3/discover/movie?api_key=4233fc015e489c82cdd57b991d85d07b&language=en-US&sort_by=vote_average.desc&page=1&timezone=America%2FNew_York&vote_average.gte=5&vote_count.gte=500&include_null_first_air_dates=false`
+    )
+    return data
   }
 
 }

@@ -3,16 +3,13 @@ import { ApiService } from '../api.service';
 import { MovieDBService } from '../movie-db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
-import {BrowserModule, DomSanitizer} from '@angular/platform-browser'
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
+import { AngularFireAuth } from "@angular/fire/auth";
 import { Pipe, PipeTransform } from '@angular/core';
+import { CRUDService } from '../crud.service';
 import { ClassStmt } from '@angular/compiler';
 import { ControlContainer } from '@angular/forms';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
-
-
-@Pipe({
-  name: 'safe'
-})
 
 @Component({
   selector: 'app-display',
@@ -42,16 +39,20 @@ export class DisplayComponent implements OnInit {
   more;
   se;
   related;
+  inFave;
+  list;
 
   constructor(
     private apiService: ApiService,
-    private router: Router,
+    private crudService: CRUDService,
     private movieDB: MovieDBService,
+    private router: Router,
     private route: ActivatedRoute,
+    private fireAuth: AngularFireAuth,
     private sanitizer: DomSanitizer,
     ) { 
       this.se = new FormGroup({
-        seasonNum: new FormControl(0)
+        seasonNum: new FormControl()
       });
     }
     
@@ -60,6 +61,8 @@ export class DisplayComponent implements OnInit {
       };
       
       getData(){
+          this.inFave =false;
+
         this.movieDB.displayMedia(this.type,this.id).subscribe(data => {
           this.mdbMedia = data
           console.log(this.mdbMedia)
@@ -75,18 +78,21 @@ export class DisplayComponent implements OnInit {
           this.apiService.displayMedia('movies',this.results.id).subscribe(data => {
             this.media = data,
             console.log(this.media)
+            this.checkList(this.type, this.mdbMedia)
           })
         }
         if(this.type =='tv'){
           this.apiService.displayMedia('shows',this.results.id).subscribe(data => {
             this.media = data,
             console.log(this.media)
-          })
-          this.getRelatedShow();
-        }
-  
-      });
+            this.checkList(this.type, this.mdbMedia)
 
+          })
+        }
+        
+      });
+      
+      this.getRelatedShow();
     };
 
     getCast(type,id){
@@ -145,7 +151,7 @@ export class DisplayComponent implements OnInit {
     }
 
     getRelatedShow(){
-      this.movieDB.getRelatedShow(this.id).subscribe(data => {
+      this.movieDB.getRelated(this.type, this.id).subscribe(data => {
         this.related = data;
         this.related = this.related.results;
         console.log(this.related)
@@ -153,6 +159,78 @@ export class DisplayComponent implements OnInit {
     }
     
     
-    
+    addToList(media){
+      this.fireAuth.auth.onAuthStateChanged(user => {
+        if(user){
+          this.crudService.addToList(user,media, this.type, 'Favorites');
+          let added = document.getElementById('added');
+          alert(`Added to List`)
+        }
+      }
+    )}
+
+    deleteFromList(media){
+      this.fireAuth.auth.onAuthStateChanged(user => {
+        if(user) {
+          this.crudService.deleteFromList(user,media,'Favorites');
+          this.inFave = false;
+          alert(`Removed from List`)
+        }
+      })
+    }
+
+    checkList(type, media){
+      this.fireAuth.auth.onAuthStateChanged(user => {
+        if(user) {
+          let list = this.crudService.readList(user.uid,"Favorites").subscribe(data => {
+            data.map(e =>{
+              let test = e.payload.doc.id;
+              // console.log(test)
+              if(type == 'movie'){
+                if(media.title==test){
+                  this.inFave = true;
+                  // console.log(this.inFave)
+                }
+              }
+
+              if(type=='tv'){
+                if(media.name==test){
+                  this.inFave = true;
+                  // console.log(this.inFave)
+                }
+              }
+            })
+          })
+        }
+      })
+    }
+
+    toChannel(name){
+      if(name.includes(' ')){
+        name = name.replace(' ', '_')
+      }
+      window.location.replace(`channels/${name}`)
+    }
+
+    openTab(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      document.getElementById(cityName).style.display = "block";
+      document.getElementById(cityName).className += ' active';
+      // evt.currentTarget.className += " active";
+    }
+
+
+
+
   }
   

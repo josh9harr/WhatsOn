@@ -11,6 +11,7 @@ export class ChannelShowsComponent implements OnInit {
   counter = 1;
   shows;
   other
+  channel = this.route.snapshot.params.name;
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,

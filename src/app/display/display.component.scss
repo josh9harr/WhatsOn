@@ -5,10 +5,55 @@
     box-shadow: black 0px 0px 10px;
 }
 
+#movieLinks{
+    margin-left: 5%;
+    margin-top: 1%;
+    button{
+        @include navButtons;
+        margin: 3px;
+    }
+    h4{
+        margin: 1% 0%;
+    }
+}
+
+
+.tabs {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  .tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+  
+  .tabs button:hover {
+    background-color: #ddd;
+  }
+  
+  .tabs button.active {
+    background-color: #ccc;
+  }
+  
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    // border: 1px solid #ccc;
+    // border-top: none;
+  }
+
 
 #description {
     background: linear-gradient(to right, $orange 35%, transparent 75%);
-    padding: 2% 0%;
+    padding: 1% 0%;
     position: relative;
     h1{
         margin: 0%;
@@ -58,35 +103,48 @@
 }
 
 #episodeList{
-    display: -webkit-box;
     align-items: baseline;
     margin: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .episodeDisplay {
-    display: inline-block;
-    padding: 5px;
-    position: relative;
-    transition: ease-in-out all .2s;
+    width: 310px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    transition: ease-in all .3s;
+    h3,h5 {
+        padding-left: 5px;
+    }
 }
 
 .episodeDisplay:hover{
-    transition: ease-in-out all .2s;
-    img, h5, h3{
-        transform: scale(1.25);
-
+    transition: ease-in all .3s;
+    transform: scale(1.05);
+    // position: relative;
+    background-color: $orange;
+    border: $black 1px solid;
+    // box-shadow: $gray 0px 0px 10px 0px;
+    .onHov{
+        transition: ease-in all .3s;
+        display: block;
+        position: absolute;
+        margin-top: 78%;
+        background-color: $orange;
+        padding: 3%;
+        // width: 100%;
+        border: $black 1px solid;
+        // box-shadow: $gray 0px 0px 10px 0px;
+        border-top: 0px;
     }
 
 }
 
-.episodeDisplay:hover .onHov{
-    // transform: scale(1.25);
-    display: block;
-    z-index: 5;
-    position: absolute;
-    left: 0;
-    background-color: $orange;
-    border: $black 1px solid;
+#genres {
+    text-align: center;
 }
 
 .onHov{
@@ -95,7 +153,7 @@
 
 #top {
     width: 50%;
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
 #text{
@@ -133,10 +191,67 @@
     width: 20px
   }
 
-  .mat-tab-label{
-      color: white;
+  #channelImg{
+    height: 35px;
+    border: $gray 1px solid;
+    margin: 1%;
+    cursor: pointer;
+    &:hover{
+        box-shadow: black 0px 0px 10px 0px;
+    }
   }
 
-  .mat-tab-label-content{
-      color: white;
-  }
+.name{
+    max-width: 85%;
+}
+
+  .add{
+      height: 28px;
+    width: 30px;
+    text-align: center;
+    margin-left: 10px;
+    font-weight: 600;
+    color: #151517;
+    border-radius: 18px;
+    border: #151517 3px solid;
+    padding-top: 2px;
+    background-color: $white;
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+    &:hover{
+        background-color: $darkGray;
+    }
+}
+
+#seasonNum{
+    font-size: 16px;
+    width: 10%;
+    height: 30px;
+    margin: 1%;
+}
+
+#more, .btn{
+    @include navButtons
+}
+
+.similar{
+    margin: 1px;
+    text-align: center;
+    width: 100%;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    img{
+        height: 250px;
+    }
+}
+
+.similar:hover{
+    box-shadow: $gray 0px 0px 10px 0px;    
+    transform: scale(1.25);
+}
+
+
+.inner{
+    padding: 2.25% 0%;
+}

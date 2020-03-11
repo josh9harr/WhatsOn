@@ -49,12 +49,12 @@ export class ResultComponent implements OnInit {
   }
 
 
-  addToList(media){
-    this.fireAuth.auth.onAuthStateChanged(user => {
-      if(user){
-        this.crudService.addToList(user,media,'Favorites');
-      }
-    }
-  )}
+  // addToList(media){
+  //   this.fireAuth.auth.onAuthStateChanged(user => {
+  //     if(user){
+  //       this.crudService.addToList(user,media,'Favorites');
+  //     }
+  //   }
+  // )}
 
 }

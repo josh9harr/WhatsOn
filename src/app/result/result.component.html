@@ -1,18 +1,21 @@
 
-<div>
+<div class="page">
+    <h1>Showing results for {{title}}</h1>
     <ul id="searchResults">
         <li *ngFor='let media of list' [class.selected]='media === selectedMedia'>
-            <div class="clickableMedia" (click)="selectMedia(media)" *ngIf='media.poster_path != null'>
-                <img class="poster"
-                src='{{imageBase}}{{size}}{{media.poster_path}}' 
-                alt="{{media.name}} poster" 
-                />
-                <h3 *ngIf='media.media_type=="tv"'>
-                    {{media.name}}
-                </h3>
-                <h3 *ngIf='media.media_type=="movie"'>{{media.title}}</h3>
+            <div class='trans' *ngIf='media.poster_path != null'>
+                <!-- <button class="add" (click)='addToList(media)'>&#43;</button> -->
+                <div class="clickableMedia" (click)="selectMedia(media)" >
+                    <img class="poster"
+                    src='{{imageBase}}{{size}}{{media.poster_path}}' 
+                    alt="{{media.name}} poster" 
+                    />
+                    <!-- <h3 *ngIf='media.media_type=="tv"'>
+                        {{media.name}}
+                    </h3>
+                    <h3 *ngIf='media.media_type=="movie"'>{{media.title}}</h3> -->
+                </div>
             </div>
-                <button (click)='addToList(media)'>Add Favorites</button>
 
         </li>
     </ul>

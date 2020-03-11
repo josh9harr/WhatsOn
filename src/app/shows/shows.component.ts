@@ -44,26 +44,18 @@ export class ShowsComponent implements OnInit {
   getGenres(){
     var count = 0
     this.genres.forEach(element => {
-      console.log(element);
+      // console.log(element);
       
       this.genreName = this.genres[count].name;
       this.names.push(this.genreName)
       
-      console.log(`Counter: ${count}`)
-      this.movieService.genreShow(this.genres[count].id).subscribe(data => {
+      // console.log(`Counter: ${count}`)
+      this.movieService.Show2(this.genres[count].id).subscribe(data => {
         this.genre = data;
         this.genre = this.genre.results;
-        console.log(count +'results = ' + this.genre.length)
-        // if(this.genre.length < 20){
-        //   console.log(count)
-        //   console.log("Other Counter ^")
-        //   this.movieService.Show2(this.genres[count].id).subscribe(other => {
-        //     this.genre = other;
-        //     this.genre = this.genre.results
-        //   });
-        //}
+        // console.log(count +'results = ' + this.genre.length)
         this.list.push(this.genre)
-        console.log(this.list)
+        // console.log(this.list)
       })
       count+=1
       
@@ -71,18 +63,19 @@ export class ShowsComponent implements OnInit {
   }
 
   selectShow(show){
-    console.log(show)
+    // console.log(show)
     window.location.replace(`/display/tv/${show.id}`);
   }
 
-  addToList(show){
-    this.fireAuth.auth.onAuthStateChanged((user) => {
-      console.log(show)
-      if(user){
-        this.crudService.addToList(user,show,'Favorites');
-      }
-    }
-  )}
+  // addToList(media){
+  //   this.fireAuth.auth.onAuthStateChanged(user => {
+  //     if(user){
+  //       this.crudService.addToList(user,media,'Favorites');
+  //       console.log(`Added To list`)
+  //       console.log(media)
+  //     }
+  //   }
+  // )}
 
 
 }

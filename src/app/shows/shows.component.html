@@ -5,8 +5,11 @@
         <h2>Popular Shows</h2>
         <div class="inner">
             <div *ngFor='let show of popular' class="column" [class.selected]='show === selectedShow'>
-                <div class="show" (click)='selectShow(show)' *ngIf='show.poster_path != null'>
-                    <img src="{{imageBase}}{{size}}{{show.poster_path}}" alt="{{show.name}} poster">
+                <div class="show" *ngIf='show.poster_path != null'>
+                    <div  (click)='selectShow(show)'>
+                            <!-- <button class="add" (click)='addToList(show)'>&#43;</button> -->
+                            <img src="{{imageBase}}{{size}}{{show.poster_path}}" alt="{{show.name}} poster">
+                        </div>
                     <!-- <h3>
                         {{show.name}}
                     </h3> -->
@@ -21,12 +24,15 @@
         <h2>
             {{names[i]}} 
         </h2>
-        <a class="all">See More ></a>
+        <!-- <a class="all">See More ></a> -->
     </div>
     <div class="inner">
         <div *ngFor='let shows of data' class="column" [class.selected]='shows === selectedShow'>
             <div class="show" (click)='selectShow(shows)' *ngIf='shows.poster_path != null'>
-                <img src="{{imageBase}}{{size}}{{shows.poster_path}}" alt="{{shows.name}} poster">
+                <div (click)='addToList(shows)'>
+                        <!-- <button class="add" (click)='addToList(shows)'>&#43;</button> -->
+                        <img src="{{imageBase}}{{size}}{{shows.poster_path}}" alt="{{shows.name}} poster" >
+                    </div>
                 <!-- <h3>
                     {{shows.name}}
                 </h3> -->

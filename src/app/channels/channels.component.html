@@ -1,11 +1,14 @@
 <div class="page">
 
+<div id="top">
     <h1>Channels</h1>
-    
+    <input type="text" placeholder="Channel Name" [(ngModel)]='channelName'>
+    <button (click)='search(channelName)'>Search</button>
+</div>
     <ul  id="channelList">
         <li id="channel" *ngFor='let channel of channelList' (click)='selected(channel.name)'>
             <img class="channelImage" src="{{channel.artwork_304x171}}" alt="{{channel.name}}"/>
-            
+            <p id="name">{{channel.name}}</p>
         </li>
     </ul>
     <button id="moreBtn" (click)='showMore()'>Show More</button>

@@ -1,0 +1,71 @@
+@import '../../styles.scss';
+
+.banner{
+    width: 100%;
+    background-color: $gray;
+    color: black;
+    padding: 3% 0%;
+    text-align: center;
+    h1, h4{
+        padding: 0%;
+        font-family: $titleFont;
+        margin: 0% 30%;
+        font-size: 3em;
+    }
+    h4{
+        font-size: 1.5em;
+    }
+    p{
+        max-width: 60%;
+        padding: 0%;
+        font-family: $otherFont;
+        margin: 2% 25%;
+    }
+}
+
+p, h2 {
+    margin: 0px;
+}
+
+.content{
+    margin: 1px;
+    text-align: center;
+    width: 100%;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    img{
+        height: 250px;
+    }
+}
+.content:hover{
+    box-shadow: $gray 0px 0px 10px 0px;    
+    transform: scale(1.25);
+}
+
+.outer{
+    width: 95%;
+}
+
+.inner{
+    padding: 2.25% 0%;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $gray; 
+    border-radius: 10px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: $orange; 
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: $darkOrange; 
+  cursor: pointer;    
+    width: 20px
+  }

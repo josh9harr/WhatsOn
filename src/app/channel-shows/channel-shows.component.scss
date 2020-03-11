@@ -9,9 +9,32 @@
 }
 
 .show {
-    width: 304px;
-    margin: 5px;
+    // width: 304px;
+    margin: 1%;
     display: flex;
     flex-direction: column;
     border: 3px $orange solid;
+    position: relative;
+    cursor: pointer;
+    &:hover{
+        box-shadow: $gray 0px 0px 15px 5px;
+    }
+}
+
+#name{
+    position: absolute;
+    bottom: 0;
+    background-color: $black;
+    opacity: .8;
+    padding: 3% 5%;
+    margin: 0px;
+    width: 90%;
+}
+
+ul{
+    padding: 0px;
+}
+
+h3{
+    padding-left: 10px;
 }

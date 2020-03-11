@@ -1,10 +1,38 @@
 
 <div class="page">
 
-    <h1>What's On?</h1>
-    <p>This is the homepage</p>
-    <a href='signin'>Sign In</a><br>
-    <a href='signup'>sign Up</a><br>
-    <a href='profile'>profile</a>
+    <section class="banner">
+        <h1>Welcome to What's On?</h1>
+        <h4>The Future of Streaming Services</h4>
+        <br>
+        <p>
+            This is a website that has content from every outlet.
+            This site connects you to all of your streaming services.
+            If available it will also give you free and purchase links to all of your favorite shows and movies.
+        </p>
+    </section>
+
+    <section id="topMovies" class="outer">
+        <h2>Top Rated Movies</h2>  
+        <div class="inner">
+            <div *ngFor='let media of movies' class="column" [class.selected]='media == selectedMedia'>
+                <div class="content" (click)='selectMedia(media,0)'>
+                    <img src="{{imageBase}}{{size}}{{media.poster_path}}" alt="Poster">
+                </div>
+            </div>
+        </div>     
+    </section>
+
+    <section id="topShows" class="outer">
+        <h2>Top Rated Shows</h2>
+        <div class="inner">
+            <div *ngFor='let media of shows' class="column" [class.selected]='media == selectedMedia'>
+                <div class="content" (click)='selectMedia(media,1)'>
+                    <img src="{{imageBase}}{{size}}{{media.poster_path}}" alt="Poster">
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 

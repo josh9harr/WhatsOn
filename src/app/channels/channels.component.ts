@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ChannelsComponent implements OnInit {
 
-  channelList = [];
+  channelList;
   other;
   counter = 1;
 
@@ -45,6 +45,14 @@ export class ChannelsComponent implements OnInit {
       });
     })
     this.counter += 1;
+  }
+
+  search(name){
+    this.apiService.searchChannel(name).subscribe(data => {
+      this.channelList = data;
+      this.channelList = this.channelList.results;
+      console.log(this.channelList)
+    })
   }
 
 }

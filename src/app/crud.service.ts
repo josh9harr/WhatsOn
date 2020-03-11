@@ -38,23 +38,36 @@ export class CRUDService {
 
   }
 
-  addToList(user, media, list){
-    if(media.media_type == 'tv'){
+  addToList(user, media, type, list){
+    // console.log(media)
+    if(media.name){
+      // console.log('in media.name')
       this.tv = {
         id: media.id, 
         title: media.name,
-        type: media.media_type,
+        type: type,
         poster: media.poster_path,
       }
+      // console.log(this.tv)
       return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.name).set(this.tv);
-    }else if(media.media_type == 'movie'){
+    }else if(media.title){
+      // console.log('in media.title')
       this.movie = {
         id: media.id, 
         title: media.title,
-        type: media.media_type,
+        type: type,
         poster: media.poster_path,
       }
       return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.title).set(this.movie);
+    }
+  }
+
+  deleteFromList(user, media, list){
+    if(media.name){
+      return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.name).delete();
+    }
+    if(media.title){
+      return this.firestore.collection('users').doc(user.uid).collection(list).doc(media.title).delete();
     }
   }
 
@@ -74,7 +87,6 @@ export class CRUDService {
     await firebase.auth().createUserWithEmailAndPassword(email, password).catch(error => {
       console.log(error)
     }).then(_ => {
-      // this.addUser();
       const user = firebase.auth().currentUser;
       if(user!=null) {
         let data = JSON.parse(JSON.stringify(userData));
